@@ -16,7 +16,6 @@ public class Municipality {
     private String password;
     private String area;
 
-    @ElementCollection
     private List<Integer> wards;
 
     @Override
