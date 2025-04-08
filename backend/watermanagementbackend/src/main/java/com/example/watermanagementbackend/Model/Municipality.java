@@ -21,17 +21,17 @@ public class Municipality {
     @Column(name = "ward_number")
     private List<Integer> wards;
 
-//    @Override
-//    public String toString() {
-//        return "Municipality{" +
-//                "id=" + id +
-//                ", municipalityName='" + municipalityName + '\'' +
-//                ", authorizedPersonName='" + authorizedPersonName + '\'' +
-//                ", password='" + password + '\'' +
-//                ", area='" + area + '\'' +
-//                ", wards=" + wards +
-//                '}';
-//    }
+    @Override
+    public String toString() {
+        return "Municipality{" +
+                "id=" + id +
+                ", municipalityName='" + municipalityName + '\'' +
+                ", authorizedPersonName='" + authorizedPersonName + '\'' +
+                ", password='" + password + '\'' +
+                ", area='" + area + '\'' +
+                ", wards=" + wards +
+                '}';
+    }
 
     public long getId() {
         return id;
