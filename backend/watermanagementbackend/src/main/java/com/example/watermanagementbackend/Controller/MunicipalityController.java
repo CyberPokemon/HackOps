@@ -13,7 +13,7 @@ public class MunicipalityController {
     @Autowired
     private MunicipalityService municipalityService;
 
-    @PostMapping("/auth/signup")
+    @PostMapping("/auth/municipalitysignup")
     public Municipality register(@RequestBody Municipality municipality)
     {
         return municipalityService.register(municipality);
