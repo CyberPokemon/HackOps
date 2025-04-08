@@ -16,19 +16,22 @@ public class Municipality {
     private String password;
     private String area;
 
+    @ElementCollection
+    @CollectionTable(name = "municipality_wards", joinColumns = @JoinColumn(name = "municipality_id"))
+    @Column(name = "ward_number")
     private List<Integer> wards;
 
-    @Override
-    public String toString() {
-        return "Municipality{" +
-                "id=" + id +
-                ", municipalityName='" + municipalityName + '\'' +
-                ", authorizedPersonName='" + authorizedPersonName + '\'' +
-                ", password='" + password + '\'' +
-                ", area='" + area + '\'' +
-                ", wards=" + wards +
-                '}';
-    }
+//    @Override
+//    public String toString() {
+//        return "Municipality{" +
+//                "id=" + id +
+//                ", municipalityName='" + municipalityName + '\'' +
+//                ", authorizedPersonName='" + authorizedPersonName + '\'' +
+//                ", password='" + password + '\'' +
+//                ", area='" + area + '\'' +
+//                ", wards=" + wards +
+//                '}';
+//    }
 
     public long getId() {
         return id;
