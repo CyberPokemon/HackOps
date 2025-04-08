@@ -19,13 +19,16 @@ public class Municipality {
     @ElementCollection
     private List<Integer> wards;
 
-    public Municipality(long id, String municipalityName, String authorizedPersonName, String password, String area, List<Integer> wards) {
-        this.id = id;
-        this.municipalityName = municipalityName;
-        this.authorizedPersonName = authorizedPersonName;
-        this.password = password;
-        this.area = area;
-        this.wards = wards;
+    @Override
+    public String toString() {
+        return "Municipality{" +
+                "id=" + id +
+                ", municipalityName='" + municipalityName + '\'' +
+                ", authorizedPersonName='" + authorizedPersonName + '\'' +
+                ", password='" + password + '\'' +
+                ", area='" + area + '\'' +
+                ", wards=" + wards +
+                '}';
     }
 
     public long getId() {
