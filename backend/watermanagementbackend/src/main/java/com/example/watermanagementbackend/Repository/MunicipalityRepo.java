@@ -8,4 +8,5 @@ import org.springframework.stereotype.Repository;
 public interface MunicipalityRepo extends JpaRepository<Municipality,Integer> {
 
 
+    Municipality findByUsername(String username);
 }

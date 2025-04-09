@@ -4,9 +4,11 @@ import com.example.watermanagementbackend.Model.Municipality;
 import com.example.watermanagementbackend.Model.MunicipalityData;
 import com.example.watermanagementbackend.Repository.MunicipalityRepo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -23,9 +25,19 @@ public class MunicipalityService {
     @Autowired
     AuthenticationManager authenticationManager;
 
-    public Municipality register(Municipality municipality) {
+    private BCryptPasswordEncoder encoder = new BCryptPasswordEncoder(12);
 
-        return municipalityRepo.save(municipality);
+    public ResponseEntity<String> register(Municipality municipality) {
+
+        if(municipalityRepo.findByUsername(municipality.getUsername()) !=null)
+        {
+            return ResponseEntity.badRequest().body("Username already exists");
+        }
+        municipality.setPassword(encoder.encode(municipality.getPassword()));
+
+        municipalityRepo.save(municipality);
+
+        return ResponseEntity.ok("User registered successfully");
     }
 
     public List<MunicipalityData> getListOfAllMunicipalities() {
