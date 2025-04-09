@@ -27,4 +27,11 @@ public class MunicipalityController {
     {
         return municipalityService.register(municipality);
     }
+
+    @PostMapping("/auth/municipalitylogin")
+    public String verify(@RequestBody Municipality municipality)
+    {
+//        System.out.println("Reached 1 time");
+        return municipalityService.verify(municipality);
+    }
 }
