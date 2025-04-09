@@ -44,6 +44,7 @@ public class WaterService {
             request.setStatus(RequestStatus.PENDING); // Optional enum value
             request.setCreatedByUsername(citizen.getUsername());
             request.setCreatedByName(citizen.getName());
+            request.getRequireDateTime();
 
             System.out.println(request);
             WaterRequest saved = waterRequestRepo.save(request);

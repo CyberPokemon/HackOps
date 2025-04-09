@@ -16,6 +16,7 @@ public class Municipality {
     private String username;
     private String password;
     private String area;
+    private Long watercapacity;
 
     @ElementCollection
     @CollectionTable(name = "municipality_wards", joinColumns = @JoinColumn(name = "municipality_id"))
@@ -32,8 +33,17 @@ public class Municipality {
                 ", username='" + username + '\'' +
                 ", password='" + password + '\'' +
                 ", area='" + area + '\'' +
+                ", watercapacity=" + watercapacity +
                 ", wards=" + wards +
                 '}';
+    }
+
+    public Long getWatercapacity() {
+        return watercapacity;
+    }
+
+    public void setWatercapacity(Long watercapacity) {
+        this.watercapacity = watercapacity;
     }
 
     public String getUsername() {

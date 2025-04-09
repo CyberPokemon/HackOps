@@ -43,7 +43,7 @@ document.addEventListener("DOMContentLoaded", () => {
         // Redirect to dashboard
         setTimeout(() => {
           window.location.href = "citizen-dashboard.html"
-        }, 1000)
+        }, 10000)
       })
     }
   
