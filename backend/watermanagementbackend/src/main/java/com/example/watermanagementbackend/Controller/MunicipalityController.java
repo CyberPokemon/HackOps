@@ -4,6 +4,7 @@ import com.example.watermanagementbackend.Model.Municipality;
 import com.example.watermanagementbackend.Model.MunicipalityData;
 import com.example.watermanagementbackend.Service.MunicipalityService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -23,8 +24,15 @@ public class MunicipalityController {
     }
 
     @PostMapping("/auth/municipalitysignup")
-    public Municipality register(@RequestBody Municipality municipality)
+    public ResponseEntity<String> register(@RequestBody Municipality municipality)
     {
         return municipalityService.register(municipality);
+    }
+
+    @PostMapping("/auth/municipalitylogin")
+    public String verify(@RequestBody Municipality municipality)
+    {
+//        System.out.println("Reached 1 time");
+        return municipalityService.verify(municipality);
     }
 }
