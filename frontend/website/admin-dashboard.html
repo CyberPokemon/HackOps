@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - SmartWater</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="dashboard.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="dashboard-layout">
+        <!-- Sidebar -->
+        <aside class="sidebar admin-sidebar">
+            <div class="sidebar-header">
+                <canvas id="sidebar-logo" width="30" height="30"></canvas>
+                <span>SmartWater Admin</span>
+            </div>
+            
+            <nav class="sidebar-nav">
+                <a href="admin-dashboard.html" class="sidebar-link active">
+                    <i class="fas fa-tachometer-alt"></i>
+                    <span>Dashboard</span>
+                </a>
+                <a href="#" class="sidebar-link">
+                    <i class="fas fa-users"></i>
+                    <span>Citizens</span>
+                </a>
+                <a href="#" class="sidebar-link">
+                    <i class="fas fa-calendar-alt"></i>
+                    <span>Schedules</span>
+                </a>
+                <a href="#" class="sidebar-link">
+                    <i class="fas fa-cog"></i>
+                    <span>Settings</span>
+                </a>
+            </nav>
+            
+            <div class="sidebar-footer">
+                <div class="user-info">
+                    <div class="user-avatar admin"></div>
+                    <div>
+                        <p class="user-name">Admin User</p>
+                        <p class="user-zone">admin@municipality.gov</p>
+                    </div>
+                </div>
+                <button class="logout-btn">
+                    <i class="fas fa-sign-out-alt"></i>
+                    <span>Log out</span>
+                </button>
+            </div>
+        </aside>
+
+        <!-- Main content -->
+        <div class="dashboard-content">
+            <!-- Header -->
+            <header class="dashboard-header">
+                <button class="sidebar-toggle">
+                    <i class="fas fa-bars"></i>
+                </button>
+                
+                <div class="header-actions">
+                    <div class="notification-bell">
+                        <i class="fas fa-bell"></i>
+                        <span class="notification-badge">3</span>
+                    </div>
+                    <div class="user-dropdown">
+                        <span class="user-name">Municipality Admin</span>
+                        <div class="user-avatar admin small"></div>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Main dashboard area -->
+            <main class="dashboard-main">
+                <div class="dashboard-header-row">
+                    <h1>Dashboard</h1>
+                    <div class="dashboard-actions">
+                        <select id="zone-filter" class="zone-filter">
+                            <option value="all">All Zones</option>
+                            <option value="north">North Zone</option>
+                            <option value="south">South Zone</option>
+                            <option value="east">East Zone</option>
+                            <option value="west">West Zone</option>
+                            <option value="central">Central Zone</option>
+                        </select>
+                        <button class="btn btn-secondary">Export Data</button>
+                    </div>
+                </div>
+
+                <!-- Overview Cards -->
+                <div class="dashboard-cards">
+                    <div class="dashboard-card">
+                        <div class="card-header">
+                            <h3>Total Citizens</h3>
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <div class="card-content">
+                            <div class="card-value">1,347</div>
+                            <p class="card-description">+2.5% from last month</p>
+                        </div>
+                    </div>
+                    
+                    <div class="dashboard-card">
+                        <div class="card-header">
+                            <h3>Total Demand (L)</h3>
+                            <i class="fas fa-tint"></i>
+                        </div>
+                        <div class="card-content">
+                            <div class="card-value">13,670</div>
+                            <p class="card-description">+0.7% from last week</p>
+                        </div>
+                    </div>
+                    
+                    <div class="dashboard-card">
+                        <div class="card-header">
+                            <h3>Total Supply (L)</h3>
+                            <i class="fas fa-tint"></i>
+                        </div>
+                        <div class="card-content">
+                            <div class="card-value">13,000</div>
+                            <p class="card-description">-1.2% from last week</p>
+                        </div>
+                    </div>
+                    
+                    <div class="dashboard-card">
+                        <div class="card-header">
+                            <h3>Supply Coverage</h3>
+                            <i class="fas fa-tint"></i>
+                        </div>
+                        <div class="card-content">
+                            <div class="card-value">95.1%</div>
+                            <p class="card-description">-1.9% from last week</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Charts -->
+                <div class="dashboard-tabs">
+                    <div class="tabs-header">
+                        <button class="tab-btn active" data-tab="demand-supply">Demand vs Supply</button>
+                        <button class="tab-btn" data-tab="consumption">Consumption History</button>
+                        <button class="tab-btn" data-tab="distribution">Citizen Distribution</button>
+                    </div>
+                    
+                    <div class="tab-content active" id="demand-supply-tab">
+                        <div class="dashboard-card full-width">
+                            <div class="card-header">
+                                <h3>Demand vs Supply by Zone</h3>
+                                <p>Compare water demand and supply across different zones</p>
+                            </div>
+                            <div class="card-content">
+                                <div class="chart-container">
+                                    <canvas id="demand-supply-chart"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="tab-content" id="consumption-tab">
+                        <div class="dashboard-card full-width">
+                            <div class="card-header">
+                                <h3>Weekly Water Consumption</h3>
+                                <p>Zone-wise water consumption over the past month</p>
+                            </div>
+                            <div class="card-content">
+                                <div class="chart-container">
+                                    <canvas id="weekly-consumption-chart"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="tab-content" id="distribution-tab">
+                        <div class="dashboard-card full-width">
+                            <div class="card-header">
+                                <h3>Citizen Distribution by Zone</h3>
+                                <p>Number of registered citizens in each zone</p>
+                            </div>
+                            <div class="card-content">
+                                <div class="chart-container">
+                                    <canvas id="distribution-chart"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Schedule Management -->
+                <div class="dashboard-grid">
+                    <div class="dashboard-card">
+                        <div class="card-header">
+                            <h3>Water Supply Schedule</h3>
+                            <p>Create and manage weekly water supply schedules</p>
+                        </div>
+                        <div class="card-content">
+                            <div class="calendar-container">
+                                <div class="calendar-header">
+                                    <button id="prev-month"><i class="fas fa-chevron-left"></i></button>
+                                    <h4 id="calendar-month">April 2025</h4>
+                                    <button id="next-month"><i class="fas fa-chevron-right"></i></button>
+                                </div>
+                                <div class="calendar" id="schedule-calendar"></div>
+                            </div>
+                            
+                            <div class="schedule-details">
+                                <h4 id="selected-date">Schedule for April 9, 2025</h4>
+                                <div class="schedule-list">
+                                    <div class="schedule-item">
+                                        <div>
+                                            <h4>North Zone</h4>
+                                            <p>6:00 AM - 10:00 AM</p>
+                                        </div>
+                                        <button class="btn btn-small">Edit</button>
+                                    </div>
+                                    <div class="schedule-item">
+                                        <div>
+                                            <h4>South Zone</h4>
+                                            <p>10:30 AM - 2:30 PM</p>
+                                        </div>
+                                        <button class="btn btn-small">Edit</button>
+                                    </div>
+                                    <div class="schedule-item">
+                                        <div>
+                                            <h4>East Zone</h4>
+                                            <p>3:00 PM - 7:00 PM</p>
+                                        </div>
+                                        <button class="btn btn-small">Edit</button>
+                                    </div>
+                                </div>
+                                <button class="btn btn-primary btn-block">Add New Schedule</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="dashboard-card">
+                        <div class="card-header">
+                            <h3>Recent Requests</h3>
+                            <p>Latest water supply requests from citizens</p>
+                        </div>
+                        <div class="card-content">
+                            <div class="requests-list">
+                                <div class="request-item">
+                                    <div>
+                                        <h4>John Doe</h4>
+                                        <p>North Zone • 500L • 4 people</p>
+                                    </div>
+                                    <span class="badge badge-new">New</span>
+                                </div>
+                                <div class="request-item">
+                                    <div>
+                                        <h4>Jane Smith</h4>
+                                        <p>South Zone • 350L • 2 people</p>
+                                    </div>
+                                    <span class="badge badge-new">New</span>
+                                </div>
+                                <div class="request-item">
+                                    <div>
+                                        <h4>Robert Johnson</h4>
+                                        <p>East Zone • 600L • 5 people</p>
+                                    </div>
+                                    <span class="badge badge-outline">Processed</span>
+                                </div>
+                                <div class="request-item">
+                                    <div>
+                                        <h4>Emily Davis</h4>
+                                        <p>West Zone • 400L • 3 people</p>
+                                    </div>
+                                    <span class="badge badge-outline">Processed</span>
+                                </div>
+                                <div class="request-item">
+                                    <div>
+                                        <h4>Michael Wilson</h4>
+                                        <p>Central Zone • 450L • 3 people</p>
+                                    </div>
+                                    <span class="badge badge-outline">Processed</span>
+                                </div>
+                            </div>
+                            <button class="btn btn-secondary btn-block">View All Requests</button>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <script src="logo.js"></script>
+    <script src="dashboard.js"></script>
+    <script src="charts.js"></script>
+    <script src="auth.js"></script>
+</body>
+</html>
