@@ -5,6 +5,8 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
+import java.util.List;
+
 @Entity
 public class Citizen {
 
@@ -14,10 +16,15 @@ public class Citizen {
 
     private String name;
     private String address;
+    private String username;
     private String password;
 
     private int wardNo;
     private String municipalityName;
+
+    public <T> Citizen(String username, String password, List<T> ts) {
+    }
+
 
     @Override
     public String toString() {
@@ -25,10 +32,19 @@ public class Citizen {
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", address='" + address + '\'' +
+                ", username='" + username + '\'' +
                 ", password='" + password + '\'' +
                 ", wardNo=" + wardNo +
                 ", municipalityName='" + municipalityName + '\'' +
                 '}';
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public long getId() {
