@@ -1,6 +1,7 @@
 package com.example.watermanagementbackend.Config;
 
 import com.example.watermanagementbackend.Service.JWTService;
+import com.example.watermanagementbackend.Service.MunicipalityUserDetailsService;
 import com.example.watermanagementbackend.Service.MyUserDetailsService;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
@@ -9,6 +10,8 @@ import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
@@ -24,15 +27,26 @@ public class JWTAuthenticationFilter extends OncePerRequestFilter {
     @Autowired
     private MyUserDetailsService userDetailsService;
 
+    @Autowired
+    private MunicipalityUserDetailsService municipalityUserDetailsService;
+
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
 
         String jwt = getJwtFromRequest(request);
         if (jwt != null && jwtService.extractUsername(jwt) != null) {
             String username = jwtService.extractUsername(jwt);
-
+            UserDetails userDetails;
             if (SecurityContextHolder.getContext().getAuthentication() == null) {
-                var userDetails = userDetailsService.loadUserByUsername(username); // need to implement userDetailsService
+                try {
+                    userDetails = userDetailsService.loadUserByUsername(username);
+                } catch (UsernameNotFoundException e) {
+                    try {
+                        userDetails = municipalityUserDetailsService.loadUserByUsername(username);
+                    } catch (UsernameNotFoundException ex) {
+                        throw new RuntimeException(ex);
+                    }
+                }
                 var authentication = new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
                 authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
                 SecurityContextHolder.getContext().setAuthentication(authentication);
