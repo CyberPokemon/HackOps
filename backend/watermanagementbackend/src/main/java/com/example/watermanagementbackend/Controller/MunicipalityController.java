@@ -47,4 +47,15 @@ public class MunicipalityController {
         String username = authentication.getName(); // From JWT
         return ResponseEntity.ok(waterService.getAllRequestsForMunicipality(username));
     }
+
+    @PostMapping("/municipality/waterreqdecision")
+    public ResponseEntity<?> approveOrRejectRequest(@RequestParam Long requestId,
+                                                    @RequestParam int allocatedAmount,
+                                                    @RequestParam String status,
+                                                    Authentication authentication)
+    {
+        String username = authentication.getName();
+        return waterService.handleRequestFromMunicipality(requestId, allocatedAmount, status, username);
+
+    }
 }

@@ -22,9 +22,19 @@ public class WaterRequest {
     private String createdByUsername;
     private String createdByName;
 
+    private String remarks;
+
     public WaterRequest() {
         this.status = RequestStatus.PENDING;
         this.timestamp = LocalDateTime.now();
+    }
+
+    public String getRemarks() {
+        return remarks;
+    }
+
+    public void setRemarks(String remarks) {
+        this.remarks = remarks;
     }
 
     @Override
