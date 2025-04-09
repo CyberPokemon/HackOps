@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Login - SmartWater</title>
+  <link rel="stylesheet" href="login.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body>
+  <div class="auth-page">
+    <a href="index.html" class="back-to-home">
+      <canvas id="logo-canvas" width="40" height="40"></canvas>
+      <span>SmartWater</span>
+    </a>
+
+    <div class="auth-container">
+      <div class="auth-card">
+        <div class="auth-header">
+          <h2>Sign in</h2>
+          <p>Enter your credentials to access your account</p>
+        </div>
+
+        <div class="auth-tabs">
+          <button class="auth-tab active" data-tab="citizen">Citizen</button>
+          <button class="auth-tab" data-tab="admin">Municipality Admin</button>
+        </div>
+
+        <div class="auth-tab-content active" id="citizen-tab">
+          <form id="citizen-login-form" class="auth-form">
+            <div class="form-group">
+              <label for="citizen-email">Email</label>
+              <input type="email" id="citizen-email" name="email" placeholder="m@example.com" required />
+            </div>
+            <div class="form-group">
+              <div class="password-header">
+                <label for="citizen-password">Password</label>
+                <a href="#" class="forgot-password">Forgot password?</a>
+              </div>
+              <input type="password" id="citizen-password" name="password" required />
+            </div>
+            <button type="submit" class="btn btn-primary btn-block">Sign in</button>
+          </form>
+        </div>
+
+        <div class="auth-tab-content" id="admin-tab">
+          <form id="admin-login-form" class="auth-form">
+            <div class="form-group">
+              <label for="admin-email">Admin Email</label>
+              <input type="email" id="admin-email" name="email" placeholder="admin@municipality.gov" required />
+            </div>
+            <div class="form-group">
+              <div class="password-header">
+                <label for="admin-password">Password</label>
+                <a href="#" class="forgot-password">Forgot password?</a>
+              </div>
+              <input type="password" id="admin-password" name="password" required />
+            </div>
+            <button type="submit" class="btn btn-primary btn-block">Sign in as Admin</button>
+          </form>
+        </div>
+      </div>
+
+      <p class="auth-redirect">
+        Don’t have an account? <a href="register.html">Sign up</a>
+      </p>
+    </div>
+  </div>
+
+  <script src="logo.js"></script>
+  <script src="auth.js"></script>
+</body>
+</html>
