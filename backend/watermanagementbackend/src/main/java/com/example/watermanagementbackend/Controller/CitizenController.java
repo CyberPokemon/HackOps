@@ -20,4 +20,11 @@ public class CitizenController {
     {
         return citizenService.register(citizen);
     }
+
+    @PostMapping("/auth/citizenlogin")
+    public String verify(@RequestBody Citizen citizen)
+    {
+//        System.out.println("Reached 1 time");
+        return citizenService.verify(citizen);
+    }
 }

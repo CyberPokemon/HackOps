@@ -22,6 +22,9 @@ public class Citizen {
     private int wardNo;
     private String municipalityName;
 
+    public Citizen() {
+    }
+
     public <T> Citizen(String username, String password, List<T> ts) {
     }
 

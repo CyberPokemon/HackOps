@@ -1,10 +1,12 @@
 package com.example.watermanagementbackend.Config;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.AuthenticationProvider;
+import org.springframework.security.authentication.ProviderManager;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -28,7 +30,12 @@ public class SecurityConfig {
     private JWTAuthenticationFilter jwtAuthenticationFilter;
 
     @Autowired
-    private UserDetailsService userDetailsService;
+    @Qualifier("municipalityUserDetailsService") // use for municipality
+    private UserDetailsService municipalityUserDetailsService;
+
+    @Autowired
+    @Qualifier("myUserDetailsService") // use for citizens
+    private UserDetailsService citizenUserDetailsService;
 
 
     @Bean
@@ -37,7 +44,7 @@ public class SecurityConfig {
                 .cors(cors -> cors.configurationSource(corsConfigurationSource()))
                 .csrf(csrf -> csrf.disable())
                 .authorizeRequests(auth -> auth
-                        .requestMatchers("/api/auth/citizensignup", "/api/auth/municipalitysignup","/api/auth/citizenslogin", "/api/auth/municipalitylogin","/api/data/municipalitylist").permitAll()
+                        .requestMatchers("/api/auth/citizensignup", "/api/auth/municipalitysignup","/api/auth/citizenlogin", "/api/auth/municipalitylogin","/api/data/municipalitylist").permitAll()
                         .anyRequest().authenticated()
                 )
                 .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)  // Add JWT filter
@@ -58,20 +65,41 @@ public class SecurityConfig {
     }
 
     @Bean
-    public AuthenticationManager authenticationManager(AuthenticationConfiguration config) throws Exception {
-        return config.getAuthenticationManager();
+    public AuthenticationManager authenticationManager() {
+        List<AuthenticationProvider> providers = List.of(
+                citizenAuthenticationProvider(),
+                municipalityAuthenticationProvider()
+        );
+        return new ProviderManager(providers);
     }
+
 
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder(12);
     }
 
+//    @Bean
+//    public AuthenticationProvider authenticationProvider() {
+//        DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
+//        provider.setPasswordEncoder(passwordEncoder());  // Use BCryptPasswordEncoder
+//        provider.setUserDetailsService(userDetailsService);
+//        return provider;
+//    }
+
     @Bean
-    public AuthenticationProvider authenticationProvider() {
+    public AuthenticationProvider citizenAuthenticationProvider() {
         DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
-        provider.setPasswordEncoder(passwordEncoder());  // Use BCryptPasswordEncoder
-        provider.setUserDetailsService(userDetailsService);
+        provider.setPasswordEncoder(passwordEncoder());
+        provider.setUserDetailsService(citizenUserDetailsService);
+        return provider;
+    }
+
+    @Bean
+    public AuthenticationProvider municipalityAuthenticationProvider() {
+        DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
+        provider.setPasswordEncoder(passwordEncoder());
+        provider.setUserDetailsService(municipalityUserDetailsService);
         return provider;
     }
 }
