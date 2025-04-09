@@ -13,7 +13,7 @@ import org.springframework.stereotype.Service;
 import java.util.Collections;
 
 @Service
-@Primary
+//@Primary
 public class MunicipalityUserDetailsService implements UserDetailsService{
 
     @Autowired
