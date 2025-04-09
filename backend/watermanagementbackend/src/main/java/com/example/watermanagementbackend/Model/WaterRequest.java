@@ -19,6 +19,8 @@ public class WaterRequest {
     private RequestStatus status;
 
     private LocalDateTime timestamp;
+    private String createdByUsername;
+    private String createdByName;
 
     public WaterRequest() {
         this.status = RequestStatus.PENDING;
@@ -35,7 +37,25 @@ public class WaterRequest {
                 ", allocatedAmount=" + allocatedAmount +
                 ", status=" + status +
                 ", timestamp=" + timestamp +
+                ", createdByUsername='" + createdByUsername + '\'' +
+                ", createdByName='" + createdByName + '\'' +
                 '}';
+    }
+
+    public String getCreatedByUsername() {
+        return createdByUsername;
+    }
+
+    public void setCreatedByUsername(String createdByUsername) {
+        this.createdByUsername = createdByUsername;
+    }
+
+    public String getCreatedByName() {
+        return createdByName;
+    }
+
+    public void setCreatedByName(String createdByName) {
+        this.createdByName = createdByName;
     }
 
     public Long getRequestId() {

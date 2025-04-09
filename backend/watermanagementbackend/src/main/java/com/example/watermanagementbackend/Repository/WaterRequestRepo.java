@@ -7,5 +7,6 @@ import java.util.List;
 
 public interface  WaterRequestRepo extends JpaRepository<WaterRequest, Long> {
     List<WaterRequest> findByMunicipalityAndWardNo(String municipality, int wardNo);
+
 }
 

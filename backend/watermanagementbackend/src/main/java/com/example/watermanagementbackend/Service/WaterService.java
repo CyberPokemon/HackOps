@@ -36,6 +36,8 @@ public class WaterService {
             request.setMunicipality(citizen.getMunicipalityName());
             request.setAllocatedAmount(0);
             request.setStatus(RequestStatus.PENDING); // Optional enum value
+            request.setCreatedByUsername(citizen.getUsername());
+            request.setCreatedByName(citizen.getName());
 
             System.out.println(request);
             WaterRequest saved = waterRequestRepo.save(request);
@@ -43,5 +45,11 @@ public class WaterService {
     }
 
 
+    public List<WaterRequest> getCitizenWardHistory(String username) {
+        Citizen citizen = citizenService.getCitizenByUsername(username);
+        String municipality = citizen.getMunicipalityName();
+        int wardNo = citizen.getWardNo();
 
+        return waterRequestRepo.findByMunicipalityAndWardNo(municipality, wardNo);
+    }
 }

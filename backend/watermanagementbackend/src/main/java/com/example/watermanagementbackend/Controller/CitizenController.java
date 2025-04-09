@@ -43,5 +43,10 @@ public class CitizenController {
         return ResponseEntity.ok(waterService.submitRequest(request, username));
     }
 
+    @GetMapping("/water/history")
+    public ResponseEntity<?> getWaterRequestHistory(Authentication authentication) {
+        String username = authentication.getName(); // JWT gets username
+        return ResponseEntity.ok(waterService.getCitizenWardHistory(username));
+    }
 
 }
