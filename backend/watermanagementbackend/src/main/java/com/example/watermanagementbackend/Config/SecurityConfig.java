@@ -27,7 +27,7 @@ public class SecurityConfig {
                 .cors(cors -> cors.configurationSource(corsConfigurationSource()))
                 .csrf(csrf -> csrf.disable())
                 .authorizeRequests(auth -> auth
-                        .requestMatchers("/api/auth/citizensignup", "/api/auth/municipalitysignup","/api/auth/citizenslogin", "/api/auth/municipalitylogin").permitAll()
+                        .requestMatchers("/api/auth/citizensignup", "/api/auth/municipalitysignup","/api/auth/citizenslogin", "/api/auth/municipalitylogin","/api/data/municipalitylist").permitAll()
                         .anyRequest().authenticated()
                 )
                 .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)  // Add JWT filter

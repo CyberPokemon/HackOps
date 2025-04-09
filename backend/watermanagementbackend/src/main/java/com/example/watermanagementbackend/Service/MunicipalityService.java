@@ -15,4 +15,10 @@ public class MunicipalityService {
 
         return municipalityRepo.save(municipality);
     }
+
+    public String[] getListOfAllMunicipalities() {
+        return municipalityRepo.findAll()
+                .stream()
+                .map(Municipality::getMunicipalityName)
+                .toArray(String[]::new);    }
 }

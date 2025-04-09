@@ -13,6 +13,12 @@ public class MunicipalityController {
     @Autowired
     private MunicipalityService municipalityService;
 
+    @GetMapping("/data/municipalitylist")
+    public String[] getListOfAllMunicipalities()
+    {
+        return municipalityService.getListOfAllMunicipalities();
+    }
+
     @PostMapping("/auth/municipalitysignup")
     public Municipality register(@RequestBody Municipality municipality)
     {
