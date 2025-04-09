@@ -66,4 +66,8 @@ public class MunicipalityService {
         }
         return municipality;
     }
+
+    public Municipality getMunicipalityProfile(String username) {
+        return getByUsername(username); // Already existing method
+    }
 }

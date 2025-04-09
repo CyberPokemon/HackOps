@@ -11,6 +11,8 @@ import org.springframework.stereotype.Service;
 import com.example.watermanagementbackend.Model.RequestStatus;
 
 
+import java.time.LocalDateTime;
+import java.time.YearMonth;
 import java.util.List;
 import java.util.Map;
 
@@ -67,22 +69,44 @@ public class WaterService {
     }
 
     public ResponseEntity<?> handleRequestFromMunicipality(Long requestId, int allocatedAmount, String status, String username) {
-
         WaterRequest request = getRequestById(requestId);
-
         Municipality municipality = municipalityService.getByUsername(username);
 
-        // Check access
         if (!request.getMunicipality().equals(municipality.getMunicipalityName())) {
             return ResponseEntity.status(403).body("You cannot modify this request.");
         }
 
-        // Validate status
         if (!status.equalsIgnoreCase("APPROVED") && !status.equalsIgnoreCase("REJECTED")) {
             return ResponseEntity.badRequest().body("Status must be APPROVED or REJECTED");
         }
 
-        // Update and save
+        if (status.equalsIgnoreCase("APPROVED")) {
+            LocalDateTime reqDate = request.getRequireDateTime();
+            if (reqDate == null) {
+                return ResponseEntity.badRequest().body("Request does not have a valid required dispatch date.");
+            }
+
+            int requestMonth = reqDate.getMonthValue();
+            int requestYear = reqDate.getYear();
+
+            List<WaterRequest> approvedThisMonth = waterRequestRepo.findByMunicipality(municipality.getMunicipalityName())
+                    .stream()
+                    .filter(r -> r.getStatus() == RequestStatus.APPROVED)
+                    .filter(r -> r.getRequireDateTime() != null &&
+                            r.getRequireDateTime().getMonthValue() == requestMonth &&
+                            r.getRequireDateTime().getYear() == requestYear)
+                    .toList();
+
+            int totalAllocated = approvedThisMonth.stream()
+                    .mapToInt(WaterRequest::getAllocatedAmount)
+                    .sum();
+
+            long maxCapacity = municipality.getWatercapacity();
+            if ((totalAllocated + allocatedAmount) > maxCapacity) {
+                return ResponseEntity.badRequest().body("Approval denied: Monthly water capacity exceeded (" + maxCapacity + " units).");
+            }
+        }
+
         request.setAllocatedAmount(allocatedAmount);
         request.setStatus(RequestStatus.valueOf(status.toUpperCase()));
         waterRequestRepo.save(request);
@@ -94,4 +118,31 @@ public class WaterService {
         return waterRequestRepo.findById(id)
                 .orElseThrow(() -> new RuntimeException("Request not found"));
     }
+
+    public Map<String, Object> getTotalApprovedWaterForCurrentMonth(String username) {
+        Municipality municipality = municipalityService.getByUsername(username);
+        String name = municipality.getMunicipalityName();
+
+        YearMonth currentMonth = YearMonth.now();
+        LocalDateTime start = currentMonth.atDay(1).atStartOfDay();
+        LocalDateTime end = currentMonth.atEndOfMonth().atTime(23, 59, 59);
+
+        List<WaterRequest> approvedRequests = waterRequestRepo
+                .findByMunicipalityAndStatusAndRequireDateTimeBetween(
+                        name,
+                        RequestStatus.APPROVED,
+                        start,
+                        end
+                );
+
+        int total = approvedRequests.stream()
+                .mapToInt(WaterRequest::getAllocatedAmount)
+                .sum();
+
+        return Map.of(
+                "municipality", name,
+                "approvedAmountThisMonth", total
+        );
+    }
+
 }
