@@ -5,6 +5,7 @@ import com.example.watermanagementbackend.Model.Municipality;
 import com.example.watermanagementbackend.Model.WaterRequest;
 import com.example.watermanagementbackend.Repository.WaterRequestRepo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.authorization.method.AuthorizeReturnObject;
 import org.springframework.stereotype.Service;
 import com.example.watermanagementbackend.Model.RequestStatus;
@@ -62,5 +63,34 @@ public class WaterService {
         Municipality municipality = municipalityService.getByUsername(municipalityUsername);
 
         return waterRequestRepo.findByMunicipality(municipality.getMunicipalityName());
+    }
+
+    public ResponseEntity<?> handleRequestFromMunicipality(Long requestId, int allocatedAmount, String status, String username) {
+
+        WaterRequest request = getRequestById(requestId);
+
+        Municipality municipality = municipalityService.getByUsername(username);
+
+        // Check access
+        if (!request.getMunicipality().equals(municipality.getMunicipalityName())) {
+            return ResponseEntity.status(403).body("You cannot modify this request.");
+        }
+
+        // Validate status
+        if (!status.equalsIgnoreCase("APPROVED") && !status.equalsIgnoreCase("REJECTED")) {
+            return ResponseEntity.badRequest().body("Status must be APPROVED or REJECTED");
+        }
+
+        // Update and save
+        request.setAllocatedAmount(allocatedAmount);
+        request.setStatus(RequestStatus.valueOf(status.toUpperCase()));
+        waterRequestRepo.save(request);
+
+        return ResponseEntity.ok("Request " + status.toUpperCase() + " successfully.");
+    }
+
+    public WaterRequest getRequestById(Long id) {
+        return waterRequestRepo.findById(id)
+                .orElseThrow(() -> new RuntimeException("Request not found"));
     }
 }
