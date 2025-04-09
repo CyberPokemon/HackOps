@@ -11,10 +11,13 @@ import org.springframework.stereotype.Service;
 import com.example.watermanagementbackend.Model.RequestStatus;
 
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.YearMonth;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 @Service
 public class WaterService {
@@ -145,4 +148,38 @@ public class WaterService {
         );
     }
 
+    public List<Map<String, Object>> getDispatchScheduleForCurrentMonth(String username) {
+        Municipality municipality = municipalityService.getByUsername(username);
+        String name = municipality.getMunicipalityName();
+
+        YearMonth currentMonth = YearMonth.now();
+        LocalDateTime start = currentMonth.atDay(1).atStartOfDay();
+        LocalDateTime end = currentMonth.atEndOfMonth().atTime(23, 59, 59);
+
+        List<WaterRequest> approvedRequests = waterRequestRepo
+                .findByMunicipalityAndStatusAndRequireDateTimeBetween(
+                        name,
+                        RequestStatus.APPROVED,
+                        start,
+                        end
+                );
+
+        // Group by date (yyyy-MM-dd) and sum allocatedAmount
+        Map<LocalDate, Integer> dailySchedule = approvedRequests.stream()
+                .collect(Collectors.groupingBy(
+                        r -> r.getRequireDateTime().toLocalDate(),
+                        Collectors.summingInt(WaterRequest::getAllocatedAmount)
+                ));
+
+        return dailySchedule.entrySet().stream()
+                .sorted(Map.Entry.comparingByKey())
+                .map(entry -> {
+                    Map<String, Object> map = new HashMap<>();
+                    map.put("date", entry.getKey().toString());
+                    map.put("totalApprovedAmount", entry.getValue());
+                    return map;
+                })
+                .collect(Collectors.toList());
+
+    }
 }

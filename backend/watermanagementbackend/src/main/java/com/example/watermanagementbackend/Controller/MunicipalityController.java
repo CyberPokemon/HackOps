@@ -72,4 +72,10 @@ public class MunicipalityController {
         return ResponseEntity.ok(waterService.getTotalApprovedWaterForCurrentMonth(username));
     }
 
+    @GetMapping("/municipality/dispatchschedule")
+    public ResponseEntity<?> getDispatchSchedule(Authentication authentication) {
+        String username = authentication.getName();
+        return ResponseEntity.ok(waterService.getDispatchScheduleForCurrentMonth(username));
+    }
+
 }
