@@ -182,4 +182,33 @@ public class WaterService {
                 .collect(Collectors.toList());
 
     }
+
+    public List<Map<String, Object>> getCitizenDispatchHistory(String username) {
+        Citizen citizen = citizenService.getCitizenByUsername(username);
+        String municipality = citizen.getMunicipalityName();
+        int wardNo = citizen.getWardNo();
+
+        List<WaterRequest> requests = waterRequestRepo.findByMunicipalityAndWardNo(municipality, wardNo);
+
+        // Group by date, filter APPROVED only
+        Map<LocalDate, Integer> dailySchedule = requests.stream()
+                .filter(req -> req.getStatus() == RequestStatus.APPROVED)
+                .filter(req -> req.getRequireDateTime() != null)
+                .collect(Collectors.groupingBy(
+                        req -> req.getRequireDateTime().toLocalDate(),
+                        Collectors.summingInt(WaterRequest::getAllocatedAmount)
+                ));
+
+        // Format and return
+        return dailySchedule.entrySet().stream()
+                .sorted(Map.Entry.comparingByKey())
+                .map(entry -> {
+                    Map<String, Object> map = new HashMap<>();
+                    map.put("date", entry.getKey().toString());
+                    map.put("totalApprovedAmount", entry.getValue());
+                    return map;
+                })
+                .collect(Collectors.toList());
+    }
+
 }
