@@ -7,4 +7,6 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface CitizenRepo extends JpaRepository<Citizen,Integer> {
+
+    Citizen findByUsername(String username);
 }

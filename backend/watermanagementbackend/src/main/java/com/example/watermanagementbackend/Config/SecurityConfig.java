@@ -27,9 +27,8 @@ public class SecurityConfig {
                 .cors(cors -> cors.configurationSource(corsConfigurationSource()))
                 .csrf(csrf -> csrf.disable())
                 .authorizeRequests(auth -> auth
-                        .requestMatchers("/api/auth/signup", "/api/auth/login").permitAll()  // Allow auth endpoints
-                        //.requestMatchers("/api/notes/createnote").authenticated()  // Secure create note endpoint
-                        .anyRequest().authenticated()  // Secure other endpoints
+                        .requestMatchers("/api/auth/citizensignup", "/api/auth/municipalitysignup","/api/auth/citizenslogin", "/api/auth/municipalitylogin").permitAll()
+                        .anyRequest().authenticated()
                 )
                 .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)  // Add JWT filter
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))  // Stateless session

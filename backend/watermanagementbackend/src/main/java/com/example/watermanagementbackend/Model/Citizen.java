@@ -5,6 +5,8 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
+import java.util.List;
+
 @Entity
 public class Citizen {
 
@@ -19,6 +21,9 @@ public class Citizen {
 
     private int wardNo;
     private String municipalityName;
+
+    public <T> Citizen(String username, String password, List<T> ts) {
+    }
 
 
     @Override

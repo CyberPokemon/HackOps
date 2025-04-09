@@ -1,6 +1,7 @@
 package com.example.watermanagementbackend.Config;
 
 import com.example.watermanagementbackend.Service.JWTService;
+import com.example.watermanagementbackend.Service.MyUserDetailsService;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -19,6 +20,9 @@ public class JWTAuthenticationFilter extends OncePerRequestFilter {
 
     @Autowired
     private JWTService jwtService;
+
+    @Autowired
+    private MyUserDetailsService userDetailsService;
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
