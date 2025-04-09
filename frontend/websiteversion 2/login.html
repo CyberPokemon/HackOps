@@ -29,13 +29,13 @@
         <div class="auth-tab-content active" id="citizen-tab">
           <form id="citizen-login-form" class="auth-form">
             <div class="form-group">
-              <label for="citizen-email">Email</label>
-              <input type="email" id="citizen-email" name="email" placeholder="m@example.com" required />
+              <label for="citizen-username">Username</label>
+              <input type="text" id="citizen-username" name="email" required />
             </div>
             <div class="form-group">
               <div class="password-header">
                 <label for="citizen-password">Password</label>
-                <a href="#" class="forgot-password">Forgot password?</a>
+                <!-- <a href="#" class="forgot-password">Forgot password?</a> -->
               </div>
               <input type="password" id="citizen-password" name="password" required />
             </div>
@@ -46,13 +46,13 @@
         <div class="auth-tab-content" id="admin-tab">
           <form id="admin-login-form" class="auth-form">
             <div class="form-group">
-              <label for="admin-email">Admin Email</label>
-              <input type="email" id="admin-email" name="email" placeholder="admin@municipality.gov" required />
+              <label for="admin-email">Admin Username</label>
+              <input type="text" id="admin-username" name="admin-username" required />
             </div>
             <div class="form-group">
               <div class="password-header">
                 <label for="admin-password">Password</label>
-                <a href="#" class="forgot-password">Forgot password?</a>
+                <!-- <a href="#" class="forgot-password">Forgot password?</a> -->
               </div>
               <input type="password" id="admin-password" name="password" required />
             </div>
@@ -68,6 +68,76 @@
   </div>
 
   <script src="logo.js"></script>
-  <script src="auth.js"></script>
+  <script>
+    // Citizen login
+    const citizenLoginForm = document.getElementById("citizen-login-form");
+  
+    if (citizenLoginForm) {
+      citizenLoginForm.addEventListener("submit", async (e) => {
+        e.preventDefault();
+  
+        const username = document.getElementById("citizen-username").value;
+        const password = document.getElementById("citizen-password").value;
+  
+        try {
+          const response = await fetch("http://localhost:8080/api/auth/citizenlogin", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ username, password }),
+          });
+  
+          if (!response.ok) {
+            throw new Error("Login failed.");
+          }
+  
+          const token = await response.text();
+          sessionStorage.setItem("token", token);
+          alert("Citizen login successful!");
+          window.location.href = "citizen-dashboard.html";
+        } catch (err) {
+          console.error("Citizen login error:", err);
+          alert("Citizen login failed: " + err.message);
+        }
+      });
+    }
+  
+    // Municipality admin login
+    const adminLoginForm = document.getElementById("admin-login-form");
+  
+    if (adminLoginForm) {
+      adminLoginForm.addEventListener("submit", async (e) => {
+        e.preventDefault();
+  
+        const username = document.getElementById("admin-username").value;
+        const password = document.getElementById("admin-password").value;
+  
+        try {
+          const response = await fetch("http://localhost:8080/api/auth/municipalitylogin", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ username, password }),
+          });
+  
+          if (!response.ok) {
+            throw new Error("Admin login failed.");
+          }
+  
+          const token = await response.text(); 
+          sessionStorage.setItem("token", token);
+          alert("Admin login successful!");
+          window.location.href = "admin-dashboard.html";
+        } catch (err) {
+          console.error("Admin login error:", err);
+          alert("Admin login failed: " + err.message);
+        }
+      });
+    }
+  </script>
+  
+  <!-- <script src="auth.js"></script> -->
 </body>
 </html>
