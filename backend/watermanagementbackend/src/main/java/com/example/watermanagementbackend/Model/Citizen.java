@@ -14,10 +14,12 @@ public class Citizen {
 
     private String name;
     private String address;
+    private String username;
     private String password;
 
     private int wardNo;
     private String municipalityName;
+
 
     @Override
     public String toString() {
@@ -25,10 +27,19 @@ public class Citizen {
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", address='" + address + '\'' +
+                ", username='" + username + '\'' +
                 ", password='" + password + '\'' +
                 ", wardNo=" + wardNo +
                 ", municipalityName='" + municipalityName + '\'' +
                 '}';
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public long getId() {

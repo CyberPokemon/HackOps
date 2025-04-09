@@ -13,6 +13,7 @@ public class Municipality {
 
     private String municipalityName;
     private String authorizedPersonName;
+    private String username;
     private String password;
     private String area;
 
@@ -21,16 +22,26 @@ public class Municipality {
     @Column(name = "ward_number")
     private List<Integer> wards;
 
+
     @Override
     public String toString() {
         return "Municipality{" +
                 "id=" + id +
                 ", municipalityName='" + municipalityName + '\'' +
                 ", authorizedPersonName='" + authorizedPersonName + '\'' +
+                ", username='" + username + '\'' +
                 ", password='" + password + '\'' +
                 ", area='" + area + '\'' +
                 ", wards=" + wards +
                 '}';
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public long getId() {
