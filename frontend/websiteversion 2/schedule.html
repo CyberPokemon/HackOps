@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Water Supply Schedule - SmartWater</title>
+  <link rel="stylesheet" href="schedule.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body>
+  <div class="page-container">
+    <!-- Header -->
+    <div class="schedule-header">
+      <h1>Weekly Water Supply Schedule</h1>
+      <button class="btn btn-primary"><i class="fas fa-plus"></i> Add Schedule</button>
+    </div>
+
+    <!-- Calendar View -->
+    <div class="calendar-container">
+      <div class="calendar-header">
+        <button><i class="fas fa-chevron-left"></i></button>
+        <h3>April 2025</h3>
+        <button><i class="fas fa-chevron-right"></i></button>
+      </div>
+      <div class="calendar">
+        <div class="calendar-day">1</div>
+        <div class="calendar-day">2</div>
+        <div class="calendar-day today">3</div>
+        <div class="calendar-day">4</div>
+        <div class="calendar-day">5</div>
+        <div class="calendar-day">6</div>
+        <div class="calendar-day">7</div>
+        <!-- Add more days dynamically or statically -->
+      </div>
+    </div>
+
+    <!-- Schedule Items -->
+    <div class="schedule-list">
+      <div class="schedule-item">
+        <div>
+          <h4>Monday</h4>
+          <p>6:00 AM – 10:00 AM</p>
+        </div>
+        <span class="badge badge-primary">Scheduled</span>
+      </div>
+      <div class="schedule-item">
+        <div>
+          <h4>Wednesday</h4>
+          <p>6:00 AM – 10:00 AM</p>
+        </div>
+        <span class="badge badge-primary">Scheduled</span>
+      </div>
+      <div class="schedule-item">
+        <div>
+          <h4>Friday</h4>
+          <p>6:00 AM – 10:00 AM</p>
+        </div>
+        <span class="badge badge-primary">Scheduled</span>
+      </div>
+    </div>
+  </div>
+
+  <script src="schedule.js"></script>
+</body>
+</html>
