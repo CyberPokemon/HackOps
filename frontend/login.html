@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sign In / Sign Up</title>
+  <link rel="stylesheet" href="login.css">
+</head>
+<body>
+  <div class="container">
+    <div class="tabs">
+      <div class="tab active" onclick="showForm('signin')">Sign In</div>
+      <div class="tab" onclick="showForm('signup')">Sign Up</div>
+    </div>
+
+    <!-- Sign In -->
+    <div id="signin" class="form active">
+      <h2>Sign In</h2>
+      <input id="signin-email" type="email" placeholder="Email" required />
+      <input id="signin-password" type="password" placeholder="Password" required />
+      <button onclick="handleSignIn()">Sign In</button>
+    </div>
+
+    <!-- Sign Up -->
+    <div id="signup" class="form">
+      <h2>Sign Up As</h2>
+      <div class="option-buttons">
+        <button onclick="chooseSignup('municipality')">Municipality</button>
+        <button onclick="chooseSignup('citizen')">Citizen</button>
+      </div>
+
+      <!-- Municipality Form -->
+      <div id="municipality-form" class="sub-form">
+        <h3>Municipality Sign Up</h3>
+        <input type="text" placeholder="Municipality Name" required />
+        <input type="text" placeholder="Authorized Person Name" required />
+        <input type="password" placeholder="Password" required />
+        <input type="text" placeholder="Area" required />
+        <input type="text" placeholder="Wards Under It (comma-separated)" required />
+        <button onclick="redirectToDashboard('municipality')">Register Municipality</button>
+      </div>
+
+      <!-- Citizen Form -->
+      <div id="citizen-form" class="sub-form">
+        <h3>Citizen Sign Up</h3>
+        <input type="text" placeholder="Full Name" required />
+        <input type="text" placeholder="Address" required />
+        <select required>
+          <option value="">Select Municipality</option>
+          <option value="Municipality A">Municipality A</option>
+          <option value="Municipality B">Municipality B</option>
+        </select>
+        <select required>
+          <option value="">Select Ward Number</option>
+          <option value="1">Ward 1</option>
+          <option value="2">Ward 2</option>
+        </select>
+        <input type="password" placeholder="Password" required />
+        <button onclick="redirectToDashboard('citizen')">Register Citizen</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="login.js"></script>
+</body>
+</html>
