@@ -1,9 +1,12 @@
 package com.example.watermanagementbackend.Controller;
 
 import com.example.watermanagementbackend.Model.Municipality;
+import com.example.watermanagementbackend.Model.MunicipalityData;
 import com.example.watermanagementbackend.Service.MunicipalityService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @CrossOrigin
@@ -14,7 +17,7 @@ public class MunicipalityController {
     private MunicipalityService municipalityService;
 
     @GetMapping("/data/municipalitylist")
-    public String[] getListOfAllMunicipalities()
+    public List<MunicipalityData> getListOfAllMunicipalities()
     {
         return municipalityService.getListOfAllMunicipalities();
     }

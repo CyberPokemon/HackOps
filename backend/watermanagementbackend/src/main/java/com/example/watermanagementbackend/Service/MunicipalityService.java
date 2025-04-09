@@ -1,9 +1,12 @@
 package com.example.watermanagementbackend.Service;
 
 import com.example.watermanagementbackend.Model.Municipality;
+import com.example.watermanagementbackend.Model.MunicipalityData;
 import com.example.watermanagementbackend.Repository.MunicipalityRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class MunicipalityService {
@@ -16,9 +19,10 @@ public class MunicipalityService {
         return municipalityRepo.save(municipality);
     }
 
-    public String[] getListOfAllMunicipalities() {
+    public List<MunicipalityData> getListOfAllMunicipalities() {
         return municipalityRepo.findAll()
                 .stream()
-                .map(Municipality::getMunicipalityName)
-                .toArray(String[]::new);    }
+                .map(m -> new MunicipalityData(m.getMunicipalityName(), m.getWards()))
+                .toList();
+    }
 }
