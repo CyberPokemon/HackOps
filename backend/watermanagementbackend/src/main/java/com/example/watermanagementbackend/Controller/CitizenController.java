@@ -49,4 +49,11 @@ public class CitizenController {
         return ResponseEntity.ok(waterService.getCitizenWardHistory(username));
     }
 
+    @GetMapping("/citizen/dispatch-history")
+    public ResponseEntity<?> getCitizenDispatchHistory(Authentication authentication) {
+        String username = authentication.getName();
+        return ResponseEntity.ok(waterService.getCitizenDispatchHistory(username));
+    }
+
+
 }

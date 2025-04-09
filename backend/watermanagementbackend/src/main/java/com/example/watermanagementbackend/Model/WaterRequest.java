@@ -19,10 +19,36 @@ public class WaterRequest {
     private RequestStatus status;
 
     private LocalDateTime timestamp;
+    private LocalDateTime requireDateTime;
     private String createdByUsername;
     private String createdByName;
 
     private String remarks;
+
+    @Override
+    public String toString() {
+        return "WaterRequest{" +
+                "requestId=" + requestId +
+                ", municipality='" + municipality + '\'' +
+                ", wardNo=" + wardNo +
+                ", requestedAmount=" + requestedAmount +
+                ", allocatedAmount=" + allocatedAmount +
+                ", status=" + status +
+                ", timestamp=" + timestamp +
+                ", requireDateTime=" + requireDateTime +
+                ", createdByUsername='" + createdByUsername + '\'' +
+                ", createdByName='" + createdByName + '\'' +
+                ", remarks='" + remarks + '\'' +
+                '}';
+    }
+
+    public LocalDateTime getRequireDateTime() {
+        return requireDateTime;
+    }
+
+    public void setRequireDateTime(LocalDateTime requireDateTime) {
+        this.requireDateTime = requireDateTime;
+    }
 
     public WaterRequest() {
         this.status = RequestStatus.PENDING;
@@ -37,20 +63,6 @@ public class WaterRequest {
         this.remarks = remarks;
     }
 
-    @Override
-    public String toString() {
-        return "WaterRequest{" +
-                "requestId=" + requestId +
-                ", municipality='" + municipality + '\'' +
-                ", wardNo=" + wardNo +
-                ", requestedAmount=" + requestedAmount +
-                ", allocatedAmount=" + allocatedAmount +
-                ", status=" + status +
-                ", timestamp=" + timestamp +
-                ", createdByUsername='" + createdByUsername + '\'' +
-                ", createdByName='" + createdByName + '\'' +
-                '}';
-    }
 
     public String getCreatedByUsername() {
         return createdByUsername;

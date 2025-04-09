@@ -58,4 +58,24 @@ public class MunicipalityController {
         return waterService.handleRequestFromMunicipality(requestId, allocatedAmount, status, username);
 
     }
+
+    @GetMapping("/municipality/profile")
+    public ResponseEntity<?> getMunicipalityProfile(Authentication authentication) {
+        String username = authentication.getName();
+        return ResponseEntity.ok(municipalityService.getMunicipalityProfile(username));
+    }
+
+
+    @GetMapping("/municipality/approvedwater")
+    public ResponseEntity<?> getApprovedWaterThisMonth(Authentication authentication) {
+        String username = authentication.getName();
+        return ResponseEntity.ok(waterService.getTotalApprovedWaterForCurrentMonth(username));
+    }
+
+    @GetMapping("/municipality/dispatchschedule")
+    public ResponseEntity<?> getDispatchSchedule(Authentication authentication) {
+        String username = authentication.getName();
+        return ResponseEntity.ok(waterService.getDispatchScheduleForCurrentMonth(username));
+    }
+
 }
