@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Supply History - SmartWater</title>
+  <link rel="stylesheet" href="history.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body>
+  <div class="page-container">
+    <header class="page-header">
+      <h1>Water Supply History</h1>
+    </header>
+
+    <section class="history-summary">
+      <div class="history-card">
+        <h3>Total Deliveries</h3>
+        <p><strong>24</strong> weeks</p>
+      </div>
+      <div class="history-card">
+        <h3>Total Volume Supplied</h3>
+        <p><strong>12,000 L</strong></p>
+      </div>
+    </section>
+
+    <section class="history-table">
+      <h2>Recent Supply Records</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Date</th>
+            <th>Day</th>
+            <th>Time Slot</th>
+            <th>Volume</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>2025-04-07</td>
+            <td>Monday</td>
+            <td>6:00 AM – 10:00 AM</td>
+            <td>500 L</td>
+            <td><span class="badge badge-success">Delivered</span></td>
+          </tr>
+          <tr>
+            <td>2025-04-05</td>
+            <td>Saturday</td>
+            <td>6:00 AM – 9:00 AM</td>
+            <td>450 L</td>
+            <td><span class="badge badge-success">Delivered</span></td>
+          </tr>
+          <tr>
+            <td>2025-03-29</td>
+            <td>Friday</td>
+            <td>6:00 AM – 10:00 AM</td>
+            <td>500 L</td>
+            <td><span class="badge badge-failed">Missed</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+  </div>
+</body>
+</html>

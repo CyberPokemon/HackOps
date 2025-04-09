@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin Dashboard - SmartWater</title>
+  <link rel="stylesheet" href="admin.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body>
+  <div class="dashboard-layout">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <canvas id="admin-logo" width="30" height="30"></canvas>
+        <span>SmartWater Admin</span>
+      </div>
+      <nav class="sidebar-nav">
+        <a href="admin-dashboard.html" class="sidebar-link active">
+          <i class="fas fa-chart-line"></i><span>Overview</span>
+        </a>
+        <a href="schedule.html" class="sidebar-link">
+          <i class="fas fa-calendar-check"></i><span>Schedules</span>
+        </a>
+        <a href="requests.html" class="sidebar-link">
+          <i class="fas fa-tasks"></i><span>Requests</span>
+        </a>
+        <a href="settings.html" class="sidebar-link">
+          <i class="fas fa-cog"></i><span>Settings</span>
+        </a>
+      </nav>
+      <div class="sidebar-footer">
+        <div class="user-info">
+          <div class="user-avatar"></div>
+          <div>
+            <p class="user-name">Admin User</p>
+            <p class="user-zone">Municipality</p>
+          </div>
+        </div>
+        <button class="logout-btn">
+          <i class="fas fa-sign-out-alt"></i><span>Log out</span>
+        </button>
+      </div>
+    </aside>
+
+    <!-- Main content -->
+    <div class="dashboard-content">
+      <!-- Header -->
+      <header class="dashboard-header">
+        <button class="sidebar-toggle"><i class="fas fa-bars"></i></button>
+        <div class="header-actions">
+          <div class="notification-bell">
+            <i class="fas fa-bell"></i>
+            <span class="notification-badge">3</span>
+          </div>
+          <div class="user-dropdown">
+            <span class="user-name">Admin</span>
+            <div class="user-avatar small"></div>
+          </div>
+        </div>
+      </header>
+
+      <!-- Main dashboard area -->
+      <main class="dashboard-main">
+        <h1>Welcome, Municipality Admin</h1>
+
+        <div class="dashboard-cards">
+          <div class="dashboard-card">
+            <div class="card-header">
+              <h3>Total Registered Citizens</h3>
+              <i class="fas fa-users"></i>
+            </div>
+            <div class="card-content">
+              <div class="card-value">12,340</div>
+              <p class="card-description">Across all zones</p>
+            </div>
+          </div>
+
+          <div class="dashboard-card">
+            <div class="card-header">
+              <h3>Today's Supply</h3>
+              <i class="fas fa-tint"></i>
+            </div>
+            <div class="card-content">
+              <div class="card-value">480,000 L</div>
+              <p class="card-description">Distributed today</p>
+            </div>
+          </div>
+
+          <div class="dashboard-card">
+            <div class="card-header">
+              <h3>Pending Requests</h3>
+              <span class="badge badge-danger">8</span>
+            </div>
+            <div class="card-content">
+              <div class="card-value">Urgent</div>
+              <p class="card-description">Handle within 24 hrs</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Table of zone supply -->
+        <div class="dashboard-card full-width">
+          <div class="card-header">
+            <h3>Zone Supply Overview</h3>
+          </div>
+          <div class="card-content table-container">
+            <table>
+              <thead>
+                <tr>
+                  <th>Zone</th>
+                  <th>Supplied (L)</th>
+                  <th>Coverage (%)</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>North Zone</td>
+                  <td>150,000</td>
+                  <td>98%</td>
+                  <td><span class="badge badge-success">Active</span></td>
+                </tr>
+                <tr>
+                  <td>South Zone</td>
+                  <td>120,000</td>
+                  <td>92%</td>
+                  <td><span class="badge badge-success">Active</span></td>
+                </tr>
+                <tr>
+                  <td>East Zone</td>
+                  <td>90,000</td>
+                  <td>85%</td>
+                  <td><span class="badge badge-primary">Normal</span></td>
+                </tr>
+                <tr>
+                  <td>West Zone</td>
+                  <td>60,000</td>
+                  <td>72%</td>
+                  <td><span class="badge badge-danger">Low</span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <script src="logo.js"></script>
+  <script src="dashboard.js"></script>
+  <script src="charts.js"></script>
+</body>
+</html>

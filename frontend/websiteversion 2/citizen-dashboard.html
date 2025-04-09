@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Citizen Dashboard - SmartWater</title>
+  <link rel="stylesheet" href="citizen.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body>
+  <div class="dashboard-layout">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <canvas id="sidebar-logo" width="30" height="30"></canvas>
+        <span>SmartWater</span>
+      </div>
+      <nav class="sidebar-nav">
+        <a href="citizen-dashboard.html" class="sidebar-link active"><i class="fas fa-home"></i><span>Dashboard</span></a>
+        <a href="schedule.html" class="sidebar-link"><i class="fas fa-calendar-alt"></i><span>Schedule</span></a>
+        <a href="history.html" class="sidebar-link"><i class="fas fa-history"></i><span>History</span></a>
+        <a href="settings.html" class="sidebar-link"><i class="fas fa-cog"></i><span>Settings</span></a>
+      </nav>
+      <div class="sidebar-footer">
+        <div class="user-info">
+          <div class="user-avatar"></div>
+          <div>
+            <p class="user-name">John Doe</p>
+            <p class="user-zone">North Zone</p>
+          </div>
+        </div>
+        <button class="logout-btn"><i class="fas fa-sign-out-alt"></i><span>Log out</span></button>
+      </div>
+    </aside>
+
+    <!-- Main content -->
+    <div class="dashboard-content">
+      <header class="dashboard-header">
+        <button class="sidebar-toggle"><i class="fas fa-bars"></i></button>
+        <div class="header-actions">
+          <div class="notification-bell">
+            <i class="fas fa-bell"></i>
+            <span class="notification-badge">2</span>
+          </div>
+          <div class="user-dropdown">
+            <span class="user-name">John Doe</span>
+            <div class="user-avatar small"></div>
+          </div>
+        </div>
+      </header>
+
+      <main class="dashboard-main">
+        <div class="dashboard-header-row">
+          <h1>Citizen Dashboard</h1>
+          <button class="btn btn-primary"><i class="fas fa-tint"></i> Request Water Supply</button>
+        </div>
+
+        <div class="alert alert-info">
+          <i class="fas fa-info-circle"></i>
+          <div>
+            <h3>Water Supply Schedule Update</h3>
+            <p>Your next water supply is scheduled for Monday, 6:00 AM - 10:00 AM.</p>
+          </div>
+        </div>
+
+        <div class="dashboard-cards">
+          <div class="dashboard-card">
+            <div class="card-header"><h3>Weekly Allocation</h3><i class="fas fa-tint"></i></div>
+            <div class="card-content">
+              <div class="card-value">500 L</div>
+              <p class="card-description">Based on your household size</p>
+            </div>
+          </div>
+          <div class="dashboard-card">
+            <div class="card-header"><h3>Next Supply</h3><i class="fas fa-calendar-alt"></i></div>
+            <div class="card-content">
+              <div class="card-value">Monday</div>
+              <p class="card-description">6:00 AM - 10:00 AM</p>
+            </div>
+          </div>
+          <div class="dashboard-card">
+            <div class="card-header"><h3>Zone Status</h3><span class="badge badge-success">Active</span></div>
+            <div class="card-content">
+              <div class="card-value">North Zone</div>
+              <p class="card-description">Supply coverage: 95%</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tabs -->
+        <div class="dashboard-tabs">
+          <div class="tabs-header">
+            <button class="tab-btn active" data-tab="consumption">Consumption</button>
+            <button class="tab-btn" data-tab="schedule">Schedule</button>
+            <button class="tab-btn" data-tab="request">Request Water</button>
+          </div>
+
+          <div class="tab-content active" id="consumption-tab">
+            <div class="dashboard-card full-width">
+              <div class="card-header">
+                <h3>Water Consumption History</h3>
+                <p>Your water consumption over the past 6 weeks</p>
+              </div>
+              <div class="card-content">
+                <div class="chart-container">
+                  <canvas id="consumption-chart"></canvas>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="tab-content" id="schedule-tab">
+            <div class="dashboard-card full-width">
+              <div class="card-header">
+                <h3>Weekly Water Supply Schedule</h3>
+                <p>Your scheduled water supply times for this week</p>
+              </div>
+              <div class="card-content">
+                <div class="schedule-list">
+                  <div class="schedule-item">
+                    <div><h4>Monday</h4><p>6:00 AM - 10:00 AM</p></div>
+                    <span class="badge badge-primary">Scheduled</span>
+                  </div>
+                  <div class="schedule-item">
+                    <div><h4>Wednesday</h4><p>6:00 AM - 10:00 AM</p></div>
+                    <span class="badge badge-primary">Scheduled</span>
+                  </div>
+                  <div class="schedule-item">
+                    <div><h4>Friday</h4><p>6:00 AM - 10:00 AM</p></div>
+                    <span class="badge badge-primary">Scheduled</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="tab-content" id="request-tab">
+            <div class="dashboard-card full-width">
+              <div class="card-header">
+                <h3>Request Additional Water Supply</h3>
+                <p>Submit a request for additional water if needed</p>
+              </div>
+              <div class="card-content">
+                <form id="water-request-form">
+                  <div class="form-group">
+                    <label for="amount">Amount Required (Liters)</label>
+                    <input type="number" id="amount" name="amount" value="500" required>
+                  </div>
+                  <div class="form-group">
+                    <label for="urgency">Urgency Level</label>
+                    <select id="urgency" name="urgency" required>
+                      <option value="low">Low - Within next week</option>
+                      <option value="normal" selected>Normal - Within next 3 days</option>
+                      <option value="high">High - Within 24 hours</option>
+                      <option value="emergency">Emergency - Immediate</option>
+                    </select>
+                  </div>
+                  <div class="form-group">
+                    <label for="notes">Additional Notes</label>
+                    <textarea id="notes" name="notes" rows="3" placeholder="Explain why you need additional water supply..."></textarea>
+                  </div>
+                  <button type="submit" class="btn btn-primary btn-block">Submit Request</button>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <script src="logo.js"></script>
+  <script src="dashboard.js"></script>
+  <script src="charts.js"></script>
+</body>
+</html>
