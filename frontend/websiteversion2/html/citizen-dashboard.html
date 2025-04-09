@@ -209,10 +209,19 @@
       const amount = document.getElementById("amount").value;
       const requireDateTime = document.getElementById("datetime").value;
 
+      console.log(JSON.stringify({
+            requestedAmount: parseInt(amount),
+            requireDateTime: requireDateTime
+          }))
+
       try {
+
+        const token = sessionStorage.getItem("token");
         const res = await fetch("http://localhost:8080/api/water/request", {
           method: "POST",
-          headers: { "Content-Type": "application/json" },
+          headers: { "Content-Type": "application/json" ,
+            "Authorization": `Bearer ${token}`
+          },
           body: JSON.stringify({
             requestedAmount: parseInt(amount),
             requireDateTime: requireDateTime

@@ -41,23 +41,23 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   
     // Water request form submission
-    const waterRequestForm = document.getElementById("water-request-form")
+    // const waterRequestForm = document.getElementById("water-request-form")
   
-    if (waterRequestForm) {
-      waterRequestForm.addEventListener("submit", (e) => {
-        e.preventDefault()
+    // if (waterRequestForm) {
+    //   waterRequestForm.addEventListener("submit", (e) => {
+    //     e.preventDefault()
   
-        // Get form data
-        const formData = new FormData(waterRequestForm)
-        const requestData = Object.fromEntries(formData.entries())
+    //     // Get form data
+    //     const formData = new FormData(waterRequestForm)
+    //     const requestData = Object.fromEntries(formData.entries())
   
-        console.log("Water request data:", requestData)
+    //     console.log("Water request data:", requestData)
   
-        // In a real app, you would send this data to your API
-        // For demo purposes, we'll simulate a successful submission
-        alert("Water request submitted successfully!")
-      })
-    }
+    //     // In a real app, you would send this data to your API
+    //     // For demo purposes, we'll simulate a successful submission
+    //     alert("Water request submitted successfully!")
+    //   })
+    // }
   
     // Settings tabs
     const settingsTabs = document.querySelectorAll(".settings-tab")
