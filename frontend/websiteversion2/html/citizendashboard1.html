@@ -5,10 +5,110 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Citizen Dashboard - SmartWater</title>
   <link rel="stylesheet" href="../css/citizendashboard1.css" />
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      margin: 0;
+      padding: 20px;
+    }
+
+    .container {
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    h1, h2 {
+      color: #333;
+    }
+
+    .card {
+      background: white;
+      padding: 20px;
+      margin-bottom: 20px;
+      border-radius: 8px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+
+    form label {
+      display: block;
+      margin: 10px 0 5px;
+    }
+
+    form input {
+      padding: 8px;
+      width: 100%;
+      box-sizing: border-box;
+    }
+
+    form button {
+      margin-top: 10px;
+      padding: 10px 15px;
+      background: #3498db;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    form button:hover {
+      background: #2980b9;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    table th, table td {
+      border: 1px solid #ccc;
+      padding: 8px;
+      text-align: left;
+    }
+
+    #calendar {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+      gap: 10px;
+    }
+
+    #calendar div {
+      padding: 10px;
+      background: #eaf6ff;
+      border: 1px solid #3498db;
+      border-radius: 4px;
+      text-align: center;
+    }
+
+    #logout-button {
+      background-color: #e74c3c;
+      color: white;
+      border: none;
+      padding: 10px 16px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    #logout-button:hover {
+      background-color: #c0392b;
+    }
+  </style>
 </head>
 <body>
   <div class="container">
+    <!-- Logout button -->
+    <div style="text-align: right; margin-bottom: 20px;">
+      <button id="logout-button">Logout</button>
+    </div>
+
     <h1>Citizen Dashboard</h1>
+
+    <!-- Citizen Info Section -->
+    <section class="card" id="citizen-info">
+      <h2>Welcome, <span id="citizen-name"></span></h2>
+      <p><strong>Address:</strong> <span id="citizen-address"></span></p>
+      <p><strong>Municipality:</strong> <span id="citizen-municipality"></span></p>
+    </section>
 
     <!-- Water Request Form -->
     <section class="card">
@@ -49,5 +149,13 @@
   </div>
 
   <script src="../js/citizendashboard1.js"></script>
+  <script>
+    // Logout functionality
+    const logoutBtn = document.getElementById("logout-button");
+    logoutBtn.addEventListener("click", () => {
+      sessionStorage.removeItem("token");
+      window.location.href = "index.html";
+    });
+  </script>
 </body>
 </html>
