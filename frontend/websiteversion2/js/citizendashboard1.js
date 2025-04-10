@@ -10,42 +10,27 @@ document.addEventListener("DOMContentLoaded", () => {
     const historyTable = document.getElementById("history-table-body");
     const calendarDiv = document.getElementById("calendar");
   
-    // Handle form submission
-    requestForm.addEventListener("submit", async (e) => {
-      e.preventDefault();
-      const amount = document.getElementById("amount").value;
-      const requireDateTime = document.getElementById("requireDateTime").value;
-  
+    async function loadCitizenProfile() {
       try {
-        const res = await fetch("http://localhost:8080/api/water/request", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            "Authorization": `Bearer ${token}`,
-          },
-          body: JSON.stringify({
-            requestedAmount: parseInt(amount),
-            requireDateTime: requireDateTime
-          })
+        const res = await fetch("http://localhost:8080/api/citizen/profile", {
+          headers: { Authorization: `Bearer ${token}` }
         });
   
-        const data = await res.json();
-  
-        if (!res.ok) throw new Error(data.message || "Request failed");
-  
-        alert("Water request submitted successfully!");
-        requestForm.reset();
-        loadHistory();
-        loadCalendar();
-      } catch (error) {
-        alert("Error submitting request: " + error.message);
+        const citizen = await res.json();
+        document.getElementById("citizen-name").textContent = citizen.name;
+        document.getElementById("citizen-address").textContent = citizen.address;
+        document.getElementById("citizen-municipality").textContent = citizen.municipalityName;
+      } catch (err) {
+        console.error("Error loading profile:", err);
+        alert("Failed to load profile. Please login again.");
+        window.location.href = "login.html";
       }
-    });
+    }
   
     async function loadHistory() {
       try {
         const res = await fetch("http://localhost:8080/api/water/history", {
-          headers: { "Authorization": `Bearer ${token}` }
+          headers: { Authorization: `Bearer ${token}` }
         });
         const data = await res.json();
         historyTable.innerHTML = "";
@@ -70,7 +55,7 @@ document.addEventListener("DOMContentLoaded", () => {
     async function loadCalendar() {
       try {
         const res = await fetch("http://localhost:8080/api/citizen/dispatch-history", {
-          headers: { "Authorization": `Bearer ${token}` }
+          headers: { Authorization: `Bearer ${token}` }
         });
         const data = await res.json();
         calendarDiv.innerHTML = "";
@@ -84,6 +69,39 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     }
   
+    // Handle form submit
+    requestForm.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const amount = document.getElementById("amount").value;
+      const requireDateTime = document.getElementById("requireDateTime").value;
+  
+      try {
+        const res = await fetch("http://localhost:8080/api/water/request", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify({
+            requestedAmount: parseInt(amount),
+            requireDateTime: requireDateTime
+          })
+        });
+  
+        const data = await res.json();
+        if (!res.ok) throw new Error(data.message || "Request failed");
+  
+        alert("Water request submitted successfully!");
+        requestForm.reset();
+        loadHistory();
+        loadCalendar();
+      } catch (error) {
+        alert("Error submitting request: " + error.message);
+      }
+    });
+  
+    // Initial loads
+    loadCitizenProfile();
     loadHistory();
     loadCalendar();
   });

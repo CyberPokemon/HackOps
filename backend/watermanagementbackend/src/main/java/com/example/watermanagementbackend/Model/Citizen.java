@@ -1,5 +1,6 @@
 package com.example.watermanagementbackend.Model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -17,6 +18,7 @@ public class Citizen {
     private String name;
     private String address;
     private String username;
+    
     private String password;
 
     private int wardNo;
