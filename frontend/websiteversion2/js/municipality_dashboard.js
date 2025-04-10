@@ -30,8 +30,20 @@ async function initDashboard() {
 
 function renderRequests(requests) {
   requestsTableBody.innerHTML = '';
-  requests.filter(r => r.status === 'PENDING').forEach(req => {
+  requests.forEach(req => {
     const tr = document.createElement('tr');
+    let actionButtons = '';
+
+    if (req.status === 'PENDING') {
+      actionButtons = `
+        <input type="number" min="0" max="${req.requestedAmount}" id="alloc-${req.requestId}" placeholder="Amt" />
+        <button onclick="approveRequest(${req.requestId}, ${req.requestedAmount})">Approve</button>
+        <button onclick="rejectRequest(${req.requestId})">Reject</button>
+      `;
+    } else {
+      actionButtons = 'N/A';
+    }
+
     tr.innerHTML = `
       <td>${req.requestId}</td>
       <td>${req.createdByName}</td>
@@ -39,10 +51,8 @@ function renderRequests(requests) {
       <td>${req.requestedAmount}</td>
       <td>${new Date(req.requireDateTime).toLocaleString()}</td>
       <td>${req.status}</td>
-      <td>
-        <input type="number" min="0" max="${req.requestedAmount}" id="alloc-${req.requestId}" placeholder="Amt" />
-        <button onclick="approveRequest(${req.requestId}, ${req.requestedAmount})">Approve</button>
-      </td>
+      <td>${req.allocatedAmount}</td>
+      <td>${actionButtons}</td>
     `;
     requestsTableBody.appendChild(tr);
   });
@@ -72,6 +82,21 @@ async function approveRequest(requestId, maxAmount) {
     initDashboard();
   } else {
     alert('Failed to approve request');
+  }
+}
+
+async function rejectRequest(requestId) {
+  const url = `http://localhost:8080/api/municipality/waterreqdecision?requestId=${requestId}&allocatedAmount=0&status=REJECTED`;
+  const res = await fetch(url, {
+    method: 'POST',
+    headers: { 'Authorization': `Bearer ${token}` }
+  });
+
+  if (res.ok) {
+    alert('Request rejected!');
+    initDashboard();
+  } else {
+    alert('Failed to reject request');
   }
 }
 
