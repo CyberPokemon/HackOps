@@ -2,13 +2,19 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Municipality Admin Dashboard</title>
   <link rel="stylesheet" href="../css/municipality_dashboard.css" />
 </head>
 <body>
   <div class="container">
-    <h1>Municipality Admin Dashboard</h1>
+    <header class="dashboard-header">
+      <div>
+        <h1>Municipality Admin Dashboard</h1>
+        <p id="municipality-name">Loading municipality...</p>
+      </div>
+      <button id="logout-btn">Logout</button>
+    </header>
 
     <section id="requests-section">
       <h2>Pending Water Requests</h2>
@@ -21,7 +27,8 @@
             <th>Requested</th>
             <th>Date</th>
             <th>Status</th>
-            <th>Action</th>
+            <th>Allocated</th>
+            <th>Decision</th>
           </tr>
         </thead>
         <tbody>
@@ -32,9 +39,7 @@
 
     <section id="calendar-section">
       <h2>Water Dispatch Calendar</h2>
-      <div id="calendar">
-        <!-- Calendar will be populated via JS -->
-      </div>
+      <div id="calendar"></div>
     </section>
   </div>
 
