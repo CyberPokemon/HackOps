@@ -1112,3 +1112,93 @@ textarea:focus {
   height: 100%;
   padding: 20px;
 }
+
+/* Add this to the end of your styles.css file */
+
+.animate-on-scroll[style*="animation-delay"] {
+  transition-delay: var(--animation-delay, 0s);
+}
+
+.video-container .overlay .animate-on-scroll {
+  transform: translateY(40px);
+  opacity: 0;
+  transition: opacity 1s ease-out, transform 1s ease-out;
+}
+
+.video-container .overlay .animate-on-scroll.scrolled-into-view {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Hero buttons animation */
+.hero-buttons.animate-on-scroll {
+  transform: translateY(30px);
+  opacity: 0;
+}
+
+.hero-buttons.animate-on-scroll.scrolled-into-view {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+/* Hero title and description styles */
+.hero-title {
+  font-size: 3.5rem !important;
+  margin-bottom: 1.5rem;
+  line-height: 1.1;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.hero-description {
+  font-size: 1.5rem !important;
+  margin-bottom: 0.75rem;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Larger hero buttons */
+.btn-large {
+  font-size: 1.125rem !important;
+  padding: 0.875rem 1.75rem !important;
+  border-radius: 0.5rem;
+  min-width: 220px;
+}
+
+.hero-buttons {
+  margin-top: 3rem !important;
+  gap: 1.5rem !important;
+}
+
+/* Make the overlay container taller if needed */
+.video-container {
+  height: calc(100vh - 80px); /* Adjusted to account for header height */
+}
+
+/* Media queries for responsive sizing */
+@media (max-width: 768px) {
+  .hero-title {
+    font-size: 2.75rem !important;
+  }
+  
+  .hero-description {
+    font-size: 1.25rem !important;
+  }
+  
+  .btn-large {
+    font-size: 1rem !important;
+    padding: 0.75rem 1.5rem !important;
+    min-width: 180px;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-title {
+    font-size: 2.25rem !important;
+  }
+  
+  .hero-description {
+    font-size: 1.125rem !important;
+  }
+}
