@@ -24,74 +24,74 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   
     // Register form submission
-    const registerForm = document.getElementById("register-form")
+    // const registerForm = document.getElementById("register-form")
   
-    if (registerForm) {
-      registerForm.addEventListener("submit", (e) => {
-        e.preventDefault()
+    // if (registerForm) {
+    //   registerForm.addEventListener("submit", (e) => {
+    //     e.preventDefault()
   
-        // Get form data
-        const formData = new FormData(registerForm)
-        const userData = Object.fromEntries(formData.entries())
+    //     // Get form data
+    //     const formData = new FormData(registerForm)
+    //     const userData = Object.fromEntries(formData.entries())
   
-        console.log("Registration data:", userData)
+    //     console.log("Registration data:", userData)
   
-        // In a real app, you would send this data to your API
-        // For demo purposes, we'll simulate a successful registration
-        alert("Registration successful! Redirecting to dashboard...")
+    //     // In a real app, you would send this data to your API
+    //     // For demo purposes, we'll simulate a successful registration
+    //     alert("Registration successful! Redirecting to dashboard...")
   
-        // Redirect to dashboard
-        setTimeout(() => {
-          window.location.href = "citizen-dashboard.html"
-        }, 1000)
-      })
-    }
+    //     // Redirect to dashboard
+    //     setTimeout(() => {
+    //       window.location.href = "citizen-dashboard.html"
+    //     }, 1000)
+    //   })
+    // }
   
     // Login form submission
-    const citizenLoginForm = document.getElementById("citizen-login-form")
-    const adminLoginForm = document.getElementById("admin-login-form")
+    // const citizenLoginForm = document.getElementById("citizen-login-form")
+    // const adminLoginForm = document.getElementById("admin-login-form")
   
-    if (citizenLoginForm) {
-      citizenLoginForm.addEventListener("submit", (e) => {
-        e.preventDefault()
+    // if (citizenLoginForm) {
+    //   citizenLoginForm.addEventListener("submit", (e) => {
+    //     e.preventDefault()
   
-        // Get form data
-        const formData = new FormData(citizenLoginForm)
-        const loginData = Object.fromEntries(formData.entries())
+    //     // Get form data
+    //     const formData = new FormData(citizenLoginForm)
+    //     const loginData = Object.fromEntries(formData.entries())
   
-        console.log("Citizen login data:", loginData)
+    //     console.log("Citizen login data:", loginData)
   
-        // In a real app, you would authenticate with your API
-        // For demo purposes, we'll simulate a successful login
-        alert("Login successful! Redirecting to dashboard...")
+    //     // In a real app, you would authenticate with your API
+    //     // For demo purposes, we'll simulate a successful login
+    //     alert("Login successful! Redirecting to dashboard...")
   
-        // Redirect to dashboard
-        setTimeout(() => {
-          window.location.href = "citizen-dashboard.html"
-        }, 1000)
-      })
-    }
+    //     // Redirect to dashboard
+    //     setTimeout(() => {
+    //       window.location.href = "citizen-dashboard.html"
+    //     }, 1000)
+    //   })
+    // }
   
-    if (adminLoginForm) {
-      adminLoginForm.addEventListener("submit", (e) => {
-        e.preventDefault()
+    // if (adminLoginForm) {
+    //   adminLoginForm.addEventListener("submit", (e) => {
+    //     e.preventDefault()
   
-        // Get form data
-        const formData = new FormData(adminLoginForm)
-        const loginData = Object.fromEntries(formData.entries())
+    //     // Get form data
+    //     const formData = new FormData(adminLoginForm)
+    //     const loginData = Object.fromEntries(formData.entries())
   
-        console.log("Admin login data:", loginData)
+    //     console.log("Admin login data:", loginData)
   
-        // In a real app, you would authenticate with your API
-        // For demo purposes, we'll simulate a successful login
-        alert("Admin login successful! Redirecting to dashboard...")
+    //     // In a real app, you would authenticate with your API
+    //     // For demo purposes, we'll simulate a successful login
+    //     alert("Admin login successful! Redirecting to dashboard...")
   
-        // Redirect to dashboard
-        setTimeout(() => {
-          window.location.href = "admin-dashboard.html"
-        }, 1000)
-      })
-    }
+    //     // Redirect to dashboard
+    //     setTimeout(() => {
+    //       window.location.href = "admin-dashboard.html"
+    //     }, 1000)
+    //   })
+    // }
   
     // Password visibility toggle
     const passwordInputs = document.querySelectorAll('input[type="password"]')

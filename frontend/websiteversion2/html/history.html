@@ -1,66 +1,189 @@
-<!DOCTYPE html>
+<!DOCTYPE html> 
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Supply History - SmartWater</title>
-  <link rel="stylesheet" href="history.css" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>History - SmartWater</title>
+  <link rel="stylesheet" href="../css/styles.css" />
+  <link rel="stylesheet" href="../css/dashboard.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
 </head>
 <body>
-  <div class="page-container">
-    <header class="page-header">
-      <h1>Water Supply History</h1>
-    </header>
-
-    <section class="history-summary">
-      <div class="history-card">
-        <h3>Total Deliveries</h3>
-        <p><strong>24</strong> weeks</p>
+  <div class="dashboard-layout">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <canvas id="sidebar-logo" width="30" height="30"></canvas>
+        <span>SmartWater</span>
       </div>
-      <div class="history-card">
-        <h3>Total Volume Supplied</h3>
-        <p><strong>12,000 L</strong></p>
+      <nav class="sidebar-nav">
+        <a href="../html/citizen-dashboard.html" class="sidebar-link"><i class="fas fa-home"></i><span>Dashboard</span></a>
+        <a href="../html/schedule.html" class="sidebar-link"><i class="fas fa-calendar-alt"></i><span>Schedule</span></a>
+        <a href="../html/history.html" class="sidebar-link active"><i class="fas fa-history"></i><span>History</span></a>
+        <a href="../html/settings.html" class="sidebar-link"><i class="fas fa-cog"></i><span>Settings</span></a>
+      </nav>
+      <div class="sidebar-footer">
+        <div class="user-info">
+          <div class="user-avatar"></div>
+          <div>
+            <p class="user-name">John Doe</p>
+            <p class="user-zone">North Zone</p>
+          </div>
+        </div>
+        <button class="logout-btn"><i class="fas fa-sign-out-alt"></i><span>Log out</span></button>
       </div>
-    </section>
+    </aside>
 
-    <section class="history-table">
-      <h2>Recent Supply Records</h2>
-      <table>
-        <thead>
-          <tr>
-            <th>Date</th>
-            <th>Day</th>
-            <th>Time Slot</th>
-            <th>Volume</th>
-            <th>Status</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>2025-04-07</td>
-            <td>Monday</td>
-            <td>6:00 AM – 10:00 AM</td>
-            <td>500 L</td>
-            <td><span class="badge badge-success">Delivered</span></td>
-          </tr>
-          <tr>
-            <td>2025-04-05</td>
-            <td>Saturday</td>
-            <td>6:00 AM – 9:00 AM</td>
-            <td>450 L</td>
-            <td><span class="badge badge-success">Delivered</span></td>
-          </tr>
-          <tr>
-            <td>2025-03-29</td>
-            <td>Friday</td>
-            <td>6:00 AM – 10:00 AM</td>
-            <td>500 L</td>
-            <td><span class="badge badge-failed">Missed</span></td>
-          </tr>
-        </tbody>
-      </table>
-    </section>
+    <!-- Main content -->
+    <div class="dashboard-content">
+      <!-- Header -->
+      <header class="dashboard-header">
+        <button class="sidebar-toggle"><i class="fas fa-bars"></i></button>
+        <div class="header-actions">
+          <div class="notification-bell">
+            <i class="fas fa-bell"></i>
+            <span class="notification-badge">2</span>
+          </div>
+          <div class="user-dropdown">
+            <span class="user-name">John Doe</span>
+            <div class="user-avatar small"></div>
+          </div>
+        </div>
+      </header>
+
+      <!-- Main dashboard area -->
+      <main class="dashboard-main">
+        <div class="dashboard-header-row">
+          <h1>Water Consumption History</h1>
+          <div class="dashboard-actions">
+            <div class="date-range-picker">
+              <button class="btn btn-outline active">Last 30 Days</button>
+              <button class="btn btn-outline">Last 3 Months</button>
+              <button class="btn btn-outline">Last Year</button>
+              <button class="btn btn-outline">Custom</button>
+            </div>
+            <button class="btn btn-secondary"><i class="fas fa-download"></i> Export</button>
+          </div>
+        </div>
+
+        <!-- Summary Cards -->
+        <div class="dashboard-cards">
+          <!-- same summary cards as before -->
+        </div>
+
+        <!-- Consumption Chart -->
+        <div class="dashboard-card full-width">
+          <div class="card-header">
+            <h3>Consumption Trends</h3>
+            <div class="chart-controls">
+              <button class="btn btn-small btn-outline active" data-chart="weekly">Weekly</button>
+              <button class="btn btn-small btn-outline" data-chart="monthly">Monthly</button>
+            </div>
+          </div>
+          <div class="card-content">
+            <div class="chart-container large">
+              <canvas id="consumption-history-chart"></canvas>
+            </div>
+          </div>
+        </div>
+
+        <!-- Detailed History Table -->
+        <div class="dashboard-card full-width">
+          <div class="card-header">
+            <h3>Detailed History</h3>
+            <div class="search-container">
+              <input type="text" placeholder="Search records..." class="search-input" />
+              <button class="search-btn"><i class="fas fa-search"></i></button>
+            </div>
+          </div>
+          <div class="card-content">
+            <div class="table-container">
+              <table class="data-table">
+                <thead>
+                  <tr>
+                    <th>Date</th>
+                    <th>Supply Time</th>
+                    <th>Volume (L)</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <!-- existing hardcoded rows -->
+                </tbody>
+              </table>
+            </div>
+            <div class="pagination">
+              <!-- existing pagination -->
+            </div>
+          </div>
+        </div>
+
+        <!-- ✅ NEW: Dispatch History Table -->
+        <div class="dashboard-card full-width">
+          <div class="card-header">
+            <h3>Dispatch History</h3>
+            <p>Approved water supply per date</p>
+          </div>
+          <div class="card-content">
+            <div class="table-container">
+              <table class="data-table">
+                <thead>
+                  <tr>
+                    <th>Date</th>
+                    <th>Approved Amount (L)</th>
+                  </tr>
+                </thead>
+                <tbody id="dispatch-table-body">
+                  <!-- Injected via JS -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <!-- Usage Breakdown (unchanged) -->
+        <div class="dashboard-card full-width">
+          <!-- same as before -->
+        </div>
+      </main>
+    </div>
   </div>
+
+  <!-- Scripts -->
+  <script src="../js/logo.js"></script>
+  <script src="../js/dashboard.js"></script>
+  <script src="../js/charts.js"></script>
+  <script src="../js/history.js"></script>
+
+  <!-- ✅ Dispatch History API Script -->
+  <script>
+    const token = 'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJpbWFsbGlrMTExMSIsImlhdCI6MTc0NDIzMTM0NSwiZXhwIjoxNzQ0NDExMzQ1fQ.ytauduKIiHEHj_LFy3Z09iu9diMoPhBW_ywhypbCVL8';
+
+    fetch('http://localhost:8080/api/citizen/dispatch-history', {
+      method: 'GET',
+      headers: {
+        'Authorization': 'Bearer ' + token,
+        'Content-Type': 'application/json'
+      }
+    })
+    .then(response => response.json())
+    .then(data => {
+      const tbody = document.getElementById('dispatch-table-body');
+      tbody.innerHTML = "";
+
+      data.forEach(entry => {
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+          <td>${entry.date}</td>
+          <td>${entry.totalApprovedAmount} L</td>
+        `;
+        tbody.appendChild(tr);
+      });
+    })
+    .catch(error => {
+      console.error('Failed to load dispatch history:', error);
+    });
+  </script>
 </body>
 </html>
