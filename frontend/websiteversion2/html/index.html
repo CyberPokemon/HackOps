@@ -1,125 +1,155 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>SmartWater - Water Supply Scheduler</title>
-  <link rel="stylesheet" href="../css/index.css" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SmartWater - Water Supply Scheduler</title>
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
+
 <body>
-  <header>
-    <div class="container">
-      <div class="logo-container">
-        <canvas id="logo-canvas" width="50" height="50">Your browser does not support canvas.</canvas>
-        <span class="logo-text">SmartWater</span>
-      </div>
-      <nav aria-label="Main Navigation">
-        <ul>
-          <li><a href="index.html" class="active">Home</a></li>
-          <li><a href="#how-it-works">About</a></li>
-          <li><a href="#contact">Contact</a></li>
-        </ul>
-      </nav>
-      <div class="auth-buttons">
-        <a href="./login.html" class="btn btn-outline">Login</a>
-        <a href="./register.html" class="btn btn-primary">Register</a>
-      </div>
-      <button class="mobile-menu-btn" aria-label="Toggle mobile menu">
-        <span></span><span></span><span></span>
-      </button>
-    </div>
-  </header>
-
-  <main>
-    <section class="hero" id="hero">
-      <div class="container">
-        <div class="hero-content">
-          <h1>Smart Local Water Supply Scheduler</h1>
-          <p>Efficiently manage water resources in your community. Register your needs as a citizen or manage supply schedules as a municipality administrator.</p>
-          <div class="hero-buttons">
-            <a href="./register.html" class="btn btn-primary">Register as Citizen</a>
-            <a href="./login.html" class="btn btn-secondary">Municipality Login</a>
-          </div>
-        </div>
-        <div class="hero-image">
-          <div class="water-animation-container" role="img" aria-label="Dashboard Preview with Water Animation">
-            <div class="dashboard-preview">
-              <div class="preview-header">
-                <div class="preview-dot"></div>
-                <div class="preview-dot"></div>
-                <div class="preview-dot"></div>
-              </div>
-              <div class="preview-content">
-                <div class="preview-chart">
-                  <canvas id="preview-chart">Your browser does not support canvas.</canvas>
-                </div>
-                <div class="preview-data">
-                  <div class="preview-item"><div class="preview-label">North Zone</div><div class="preview-bar" style="width: 80%;"></div></div>
-                  <div class="preview-item"><div class="preview-label">South Zone</div><div class="preview-bar" style="width: 65%;"></div></div>
-                  <div class="preview-item"><div class="preview-label">East Zone</div><div class="preview-bar" style="width: 90%;"></div></div>
-                </div>
-              </div>
+    <header>
+        <div class="container">
+            <div class="logo-container">
+                <canvas id="logo-canvas" width="50" height="50"></canvas>
+                <span class="logo-text">SmartWater</span>
             </div>
-            <div class="water-drop" id="drop1"></div>
-            <div class="water-drop" id="drop2"></div>
-            <div class="water-drop" id="drop3"></div>
-          </div>
+            <nav>
+                <ul>
+                    <li><a href="index.html" class="active">Home</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+            <div class="auth-buttons">
+                <a href="login.html" class="btn btn-outline">Login</a>
+                <a href="register.html" class="btn btn-primary">Register</a>
+            </div>
+            <div class="mobile-menu-btn">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
         </div>
-      </div>
-    </section>
+    </header>
 
-    <section class="how-it-works" id="how-it-works">
-      <div class="container">
-        <h2>How It Works</h2>
-        <p class="section-description">Our platform connects citizens with municipality administrators to optimize water distribution.</p>
-        <div class="features">
-          <div class="feature-card">
-            <div class="feature-icon"><i class="fas fa-user-plus"></i></div>
-            <h3>Register Your Needs</h3>
-            <p>Citizens can register their water requirements.</p>
-          </div>
-          <div class="feature-card">
-            <div class="feature-icon"><i class="fas fa-chart-line"></i></div>
-            <h3>View Demand vs Supply</h3>
-            <p>Administrators monitor water demand and supply.</p>
-          </div>
-          <div class="feature-card">
-            <div class="feature-icon"><i class="fas fa-calendar-alt"></i></div>
-            <h3>Weekly Schedules</h3>
-            <p>Get notified about water supply schedules.</p>
-          </div>
+    <main>
+        <div class="video-container">
+            <video autoplay muted loop id="background-video">
+                <source src="water.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+            <div class="overlay">
+                <div class="container">
+                    <h1 style="text-align: center;">Smart Local Water Supply Scheduler</h1>
+                    <p>Efficiently manage water resources in your community. Register your needs as a citizen or
+                        <p style="text-align: center;">manage supply schedules as a municipality administrator.</p>
+                    <div class="hero-buttons">
+                        <a href="register.html" class="btn btn-primary">Register as Citizen</a>
+                        <a href="register.html" class="btn btn-primary">Register as Admin</a>
+                    </div>
+                </div>
+
+            </div>
+            </section>
         </div>
-      </div>
-    </section>
-
-    <section class="cta">
-      <div class="container">
-        <h2>Ready to optimize your water management?</h2>
-        <p>Join thousands of citizens and municipalities already using SmartWater.</p>
-        <a href="./register.html" class="btn btn-primary">Get Started Today</a>
-      </div>
-    </section>
-  </main>
-
-  <footer role="contentinfo">
-    <div class="container">
-      <div class="footer-content">
-        <div class="footer-logo">
-          <canvas id="footer-logo-canvas" width="40" height="40">Your browser does not support canvas.</canvas>
-          <span>SmartWater</span>
-          <p>Efficient water management for sustainable communities.</p>
         </div>
-        
-      </div>
-      <div class="footer-bottom">
-        <p>&copy; 2025 SmartWater. All rights reserved.</p>
-        
-      </div>
-    </div>
-  </footer>
 
-  <script src="../js/logo.js" defer></script>
-  <script src="../js/home.js" defer></script>
+        <section class="how-it-works">
+            <div class="container">
+                <h2>How It Works</h2>
+                <p class="section-description">Our platform connects citizens with municipality administrators to
+                    optimize water distribution.</p>
+
+                <div class="features">
+                    <div class="feature-card animate-on-scroll">
+                        <div class="feature-icon">
+                            <i class="fas fa-user-plus"></i>
+                        </div>
+                        <h3>Register Your Needs</h3>
+                        <p>Citizens can register their water requirements</p>
+                        <div class="feature-description">
+                            <p>Specify your household size, zone, and weekly water requirements through an easy-to-use
+                                interface.</p>
+                        </div>
+                    </div>
+                    <div class="feature-card animate-on-scroll">
+                        <div class="feature-icon">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        <h3>View Demand vs Supply</h3>
+                        <p>Administrators monitor water demand and supply</p>
+                        <div class="feature-description">
+                            <p>Municipality officials can view real-time data on water demand across different zones to
+                                plan distribution.</p>
+                        </div>
+                    </div>
+                    <div class="feature-card animate-on-scroll">
+                        <div class="feature-icon">
+                            <i class="fas fa-calendar-alt"></i>
+                        </div>
+                        <h3>Weekly Schedules</h3>
+                        <p>Get notified about water supply schedules</p>
+                        <div class="feature-description">
+                            <p>Receive notifications about the weekly water supply schedule for your zone based on
+                                availability.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="hero">
+            <div class="container">
+                <div class="hero-content animate-on-scroll">
+                    <h2>Ready to optimize your water management?</h2>
+                    <p>Join thousands of citizens and municipalities already using SmartWater.</p>
+                    <a href="register.html" class="btn btn-primary">Get Started Today</a>
+                </div>
+                <div class="hero-image">
+                    <div class="water-animation-container">
+                        <div class="chart-container">
+                            <canvas id="water-management-chart"></canvas>
+                        </div>
+                        <div class="water-drop" id="drop1"></div>
+                        <div class="water-drop" id="drop2"></div>
+                        <div class="water-drop" id="drop3"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <span>SmartWater</span>
+                    <p>Efficient water management for sustainable communities.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../js/main.js"></script>
+    <script src="../js/logo.js"></script>
+    <script src="../js/home.js"></script>
+    <script>
+        // Scroll animation
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('scrolled-into-view');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.animate-on-scroll').forEach(el => {
+            observer.observe(el);
+        });
+    </script>
 </body>
+
 </html>
