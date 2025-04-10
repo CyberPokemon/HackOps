@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Municipality Admin Dashboard</title>
+  <link rel="stylesheet" href="../css/municipality_dashboard.css" />
+</head>
+<body>
+  <div class="container">
+    <h1>Municipality Admin Dashboard</h1>
+
+    <section id="requests-section">
+      <h2>Pending Water Requests</h2>
+      <table id="requests-table">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>User</th>
+            <th>Ward</th>
+            <th>Requested</th>
+            <th>Date</th>
+            <th>Status</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- Rows will be populated via JS -->
+        </tbody>
+      </table>
+    </section>
+
+    <section id="calendar-section">
+      <h2>Water Dispatch Calendar</h2>
+      <div id="calendar">
+        <!-- Calendar will be populated via JS -->
+      </div>
+    </section>
+  </div>
+
+  <script src="../js/municipality_dashboard.js"></script>
+</body>
+</html>
