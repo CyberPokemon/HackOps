@@ -253,3 +253,70 @@ document.addEventListener('DOMContentLoaded', () => {
                 ctx.textAlign = 'left';
                 ctx.fillText(dataset.label, x + 15, legendY + 5);
             }
+
+        );
+    }
+}
+
+// Pie Chart
+function drawPieChart(ctx, data, chartWidth, chartHeight, options) {
+    const { padding, colors } = options;
+    const total = data.datasets[0].data.reduce((sum, value) => sum + value, 0);
+    const centerX = padding + chartWidth / 2;
+    const centerY = padding + chartHeight / 2;
+    const radius = Math.min(chartWidth, chartHeight) / 2 - 10;
+    
+    let startAngle = 0;
+    const values = data.datasets[0].data;
+    
+    values.forEach((value, i) => {
+        const sliceAngle = (value / total) * Math.PI * 2;
+        const endAngle = startAngle + sliceAngle;
+        
+        ctx.beginPath();
+        ctx.moveTo(centerX, centerY);
+        ctx.arc(centerX, centerY, radius, startAngle, endAngle);
+        ctx.closePath();
+        ctx.fillStyle = colors[i % colors.length];
+        ctx.fill();
+        
+        startAngle = endAngle;
+    });
+
+    // Draw legend
+    if (options.legend) {
+        const legendY = padding + chartHeight + 30;
+        const legendItemWidth = chartWidth / values.length;
+
+        values.forEach((_, i) => {
+            const x = padding + i * legendItemWidth;
+
+            // Draw color box
+            ctx.fillStyle = colors[i % colors.length];
+            ctx.fillRect(x, legendY, 10, 10);
+
+            // Draw label
+            ctx.fillStyle = '#64748b';
+            ctx.textAlign = 'left';
+            ctx.fillText(data.labels[i], x + 15, legendY + 5);
+        });
+    }
+}
+
+// Example usage
+const exampleData = {
+    labels: ['Jan', 'Feb', 'Mar', 'Apr'],
+    datasets: [
+        {
+            label: 'Requests',
+            data: [30, 45, 25, 60]
+        },
+        {
+            label: 'Deliveries',
+            data: [20, 35, 30, 55]
+        }
+    ]
+};
+
+drawChart('myCanvas', 'bar', exampleData);
+});
