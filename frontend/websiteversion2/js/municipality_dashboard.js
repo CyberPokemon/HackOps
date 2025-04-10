@@ -1,10 +1,20 @@
-// municipality_dashboard.js
-
 const token = sessionStorage.getItem('token');
+if (!token) {
+  window.location.href = '../index.html';
+}
+
 const requestsTableBody = document.querySelector('#requests-table tbody');
 const calendarContainer = document.getElementById('calendar');
+const municipalityNameEl = document.getElementById('municipality-name');
+const logoutBtn = document.getElementById('logout-btn');
+
 let municipalityCapacity = 0;
 let approvedAmountThisMonth = 0;
+
+logoutBtn.addEventListener('click', () => {
+  sessionStorage.removeItem('token');
+  window.location.href = '../html/index.html';
+});
 
 async function fetchData(url) {
   const res = await fetch(url, {
@@ -21,8 +31,11 @@ async function initDashboard() {
     fetchData('http://localhost:8080/api/municipality/dispatchschedule'),
   ]);
 
+  console.log(profile);
   municipalityCapacity = profile.watercapacity;
   approvedAmountThisMonth = approved.approvedAmountThisMonth;
+
+  municipalityNameEl.textContent = profile.municipalityName || 'Unknown Municipality';
 
   renderRequests(requests);
   renderCalendar(dispatch);
@@ -51,7 +64,7 @@ function renderRequests(requests) {
       <td>${req.requestedAmount}</td>
       <td>${new Date(req.requireDateTime).toLocaleString()}</td>
       <td>${req.status}</td>
-      <td>${req.allocatedAmount}</td>
+      <td>${req.allocatedAmount ?? '-'}</td>
       <td>${actionButtons}</td>
     `;
     requestsTableBody.appendChild(tr);
