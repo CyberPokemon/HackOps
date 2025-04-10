@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Citizen Dashboard - SmartWater</title>
+  <link rel="stylesheet" href="../css/citizendashboard1.css" />
+</head>
+<body>
+  <div class="container">
+    <h1>Citizen Dashboard</h1>
+
+    <!-- Water Request Form -->
+    <section class="card">
+      <h2>Request Water</h2>
+      <form id="water-request-form">
+        <label>Amount (litres):</label>
+        <input type="number" id="amount" required />
+        <label>Required Date & Time:</label>
+        <input type="datetime-local" id="requireDateTime" required />
+        <button type="submit">Submit Request</button>
+      </form>
+    </section>
+
+    <!-- Request History Table -->
+    <section class="card">
+      <h2>Request History</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Municipality</th>
+            <th>Ward</th>
+            <th>Requested</th>
+            <th>Allocated</th>
+            <th>Status</th>
+            <th>Required Date</th>
+          </tr>
+        </thead>
+        <tbody id="history-table-body"></tbody>
+      </table>
+    </section>
+
+    <!-- Water Dispatch Calendar -->
+    <section class="card">
+      <h2>Water Allocation Calendar</h2>
+      <div id="calendar"></div>
+    </section>
+  </div>
+
+  <script src="../js/citizendashboard1.js"></script>
+</body>
+</html>
