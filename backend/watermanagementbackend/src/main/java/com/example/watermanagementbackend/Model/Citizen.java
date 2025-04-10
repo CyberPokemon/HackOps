@@ -18,7 +18,7 @@ public class Citizen {
     private String name;
     private String address;
     private String username;
-    
+
     private String password;
 
     private int wardNo;
