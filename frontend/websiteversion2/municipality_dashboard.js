@@ -1,6 +1,6 @@
 const token = sessionStorage.getItem('token');
 if (!token) {
-  window.location.href = '../index.html';
+  window.location.href = './index.html';
 }
 
 const requestsTableBody = document.querySelector('#requests-table tbody');
@@ -13,7 +13,7 @@ let approvedAmountThisMonth = 0;
 
 logoutBtn.addEventListener('click', () => {
   sessionStorage.removeItem('token');
-  window.location.href = '../html/index.html';
+  window.location.href = './index.html';
 });
 
 async function fetchData(url) {
@@ -25,10 +25,10 @@ async function fetchData(url) {
 
 async function initDashboard() {
   const [requests, approved, profile, dispatch] = await Promise.all([
-    fetchData('http://localhost:8080/api/municipality/waterrequests'),
-    fetchData('http://localhost:8080/api/municipality/approvedwater'),
-    fetchData('http://localhost:8080/api/municipality/profile'),
-    fetchData('http://localhost:8080/api/municipality/dispatchschedule'),
+    fetchData(`${API_BASE_URL}/api/municipality/waterrequests`),
+    fetchData(`${API_BASE_URL}/api/municipality/approvedwater`),
+    fetchData(`${API_BASE_URL}/api/municipality/profile`),
+    fetchData(`${API_BASE_URL}/api/municipality/dispatchschedule`),
   ]);
 
   console.log(profile);
@@ -84,7 +84,7 @@ async function approveRequest(requestId, maxAmount) {
     return;
   }
 
-  const url = `http://localhost:8080/api/municipality/waterreqdecision?requestId=${requestId}&allocatedAmount=${amount}&status=APPROVED`;
+  const url = `${API_BASE_URL}/api/municipality/waterreqdecision?requestId=${requestId}&allocatedAmount=${amount}&status=APPROVED`;
   const res = await fetch(url, {
     method: 'POST',
     headers: { 'Authorization': `Bearer ${token}` }
@@ -99,7 +99,7 @@ async function approveRequest(requestId, maxAmount) {
 }
 
 async function rejectRequest(requestId) {
-  const url = `http://localhost:8080/api/municipality/waterreqdecision?requestId=${requestId}&allocatedAmount=0&status=REJECTED`;
+  const url = `${API_BASE_URL}/api/municipality/waterreqdecision?requestId=${requestId}&allocatedAmount=0&status=REJECTED`;
   const res = await fetch(url, {
     method: 'POST',
     headers: { 'Authorization': `Bearer ${token}` }

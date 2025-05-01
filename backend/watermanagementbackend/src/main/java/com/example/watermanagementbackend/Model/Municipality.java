@@ -18,8 +18,16 @@ public class Municipality {
     private String area;
     private Long watercapacity;
 
+//    @ElementCollection
+//    @CollectionTable(name = "municipality_wards", joinColumns = @JoinColumn(name = "municipality_id"))
+//    @Column(name = "ward_number")
+//    private List<Integer> wards;
+
     @ElementCollection
-    @CollectionTable(name = "municipality_wards", joinColumns = @JoinColumn(name = "municipality_id"))
+    @CollectionTable(
+            name = "municipality_wards",
+            joinColumns = @JoinColumn(name = "municipality_id", foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT))
+    )
     @Column(name = "ward_number")
     private List<Integer> wards;
 

@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Login - SmartWater</title>
-  <link rel="stylesheet" href="../css/login.css" />
+  <link rel="stylesheet" href="./login.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 <body>
@@ -67,7 +67,8 @@
     </div>
   </div>
 
-  <script src="../js/logo.js"></script>
+  <script src="./logo.js"></script>
+  <script src="config.js"></script>
   <script>
     // Citizen login
     const citizenLoginForm = document.getElementById("citizen-login-form");
@@ -80,7 +81,7 @@
         const password = document.getElementById("citizen-password").value;
   
         try {
-          const response = await fetch("http://localhost:8080/api/auth/citizenlogin", {
+          const response = await fetch(`${API_BASE_URL}/api/auth/citizenlogin`, {
             method: "POST",
             headers: {
               "Content-Type": "application/json",
@@ -114,7 +115,7 @@
         const password = document.getElementById("admin-password").value;
   
         try {
-          const response = await fetch("http://localhost:8080/api/auth/municipalitylogin", {
+          const response = await fetch(`${API_BASE_URL}/api/auth/municipalitylogin`, {
             method: "POST",
             headers: {
               "Content-Type": "application/json",
@@ -138,6 +139,6 @@
     }
   </script>
   
-  <script src="../js/auth.js"></script>
+  <script src="./auth.js"></script>
 </body>
 </html>

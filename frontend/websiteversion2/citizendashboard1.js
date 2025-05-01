@@ -12,7 +12,7 @@ document.addEventListener("DOMContentLoaded", () => {
   
     async function loadCitizenProfile() {
       try {
-        const res = await fetch("http://localhost:8080/api/citizen/profile", {
+        const res = await fetch(`${API_BASE_URL}/api/citizen/profile`, {
           headers: { Authorization: `Bearer ${token}` }
         });
   
@@ -29,7 +29,7 @@ document.addEventListener("DOMContentLoaded", () => {
   
     async function loadHistory() {
       try {
-        const res = await fetch("http://localhost:8080/api/water/history", {
+        const res = await fetch(`${API_BASE_URL}/api/water/history`, {
           headers: { Authorization: `Bearer ${token}` }
         });
         const data = await res.json();
@@ -54,7 +54,7 @@ document.addEventListener("DOMContentLoaded", () => {
   
     async function loadCalendar() {
       try {
-        const res = await fetch("http://localhost:8080/api/citizen/dispatch-history", {
+        const res = await fetch(`${API_BASE_URL}/api/citizen/dispatch-history`, {
           headers: { Authorization: `Bearer ${token}` }
         });
         const data = await res.json();
@@ -76,7 +76,7 @@ document.addEventListener("DOMContentLoaded", () => {
       const requireDateTime = document.getElementById("requireDateTime").value;
   
       try {
-        const res = await fetch("http://localhost:8080/api/water/request", {
+        const res = await fetch(`${API_BASE_URL}/api/water/request`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
