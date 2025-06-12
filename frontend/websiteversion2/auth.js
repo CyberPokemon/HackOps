@@ -105,8 +105,8 @@ document.addEventListener("DOMContentLoaded", () => {
       toggleBtn.className = "password-toggle"
       toggleBtn.innerHTML = '<i class="fas fa-eye"></i>'
       toggleBtn.style.position = "absolute"
-      toggleBtn.style.right = "10px"
-      toggleBtn.style.top = "50%"
+      toggleBtn.style.right = "15px"
+      toggleBtn.style.top = "72%"
       toggleBtn.style.transform = "translateY(-50%)"
       toggleBtn.style.background = "none"
       toggleBtn.style.border = "none"
