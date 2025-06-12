@@ -21,7 +21,7 @@
       <nav>
         <ul>
           <li><a href="index.html" class="active">Home</a></li>
-          <li><a href="#about">About</a></li>
+          <li><a href="about.html">About</a></li>
           <li><a href="#contact">Contact</a></li>
         </ul>
       </nav>
@@ -30,31 +30,28 @@
         <a href="register.html" class="btn btn-primary">Register</a>
       </div>
       <div class="mobile-menu-btn">
-        <span></span>
-        <span></span>
-        <span></span>
+        <span><a href="index.html">Home</a></span>
+        <span><a href="#about">About</a></span>
+        <span><a href="#contact">Contact</a></span>
       </div>
     </div>
   </header>
 
   <main>
-    <div class="video-container">
+<div class="video-container">
       <video autoplay muted loop id="background-video">
-        <source src="water.mp4" type="video/mp4">
-        Your browser does not support the video tag.
+          <source src="water.mp4" type="video/mp4">
+          Your browser does not support the video tag.
       </video>
       <div class="overlay">
-        <div class="container">
-          <h1 class="animate-on-scroll hero-title" style="text-align: center;">Smart Local Water Supply Scheduler</h1>
-          <p class="animate-on-scroll hero-description" style="animation-delay: 0.3s">Efficiently manage water resources
-            in your community. Register your needs as a citizen or</p>
-          <p class="animate-on-scroll hero-description" style="text-align: center; animation-delay: 0.5s">manage supply
-            schedules as a municipality administrator.</p>
-          <div class="hero-buttons animate-on-scroll" style="animation-delay: 0.7s">
-            <a href="register.html" class="btn btn-primary btn-large">Register as Citizen</a>
-            <a href="register.html" class="btn btn-primary btn-large">Register as Admin</a>
+          <div class="container">
+              <h1 style= "font-size: 60px" class="animate-on-scroll hero-title" style="text-align: center;">Smart Local Water Supply Scheduler</h1>
+              <p style="font-size: 18px" class="animate-on-scroll hero-description" style="animation-delay: 0.3s">Efficiently manage water resources in your community. Register your needs as a citizen or manage supply schedules as a municipality administrator.</p>
+              <div class="hero-buttons animate-on-scroll" style="animation-delay: 0.7s">
+                  <a href="register.html" class="btn btn-primary btn-large">Register as Citizen</a>
+                  <a href="register.html" class="btn btn-primary btn-large">Register as Admin</a>
+              </div>
           </div>
-        </div>
       </div>
     </div>
 
@@ -137,8 +134,6 @@
   <script src="/main.js"></script>
   <script src="/logo.js"></script>
   <script src="/home.js"></script>
-  <script src="/charts.js"></script>
-  <script src="config.js"></script>
   <script>
     // Scroll animation
     const observer = new IntersectionObserver((entries) => {
