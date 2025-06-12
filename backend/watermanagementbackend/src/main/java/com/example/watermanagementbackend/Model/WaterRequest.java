@@ -14,7 +14,7 @@ public class WaterRequest {
     private int wardNo;
     private int requestedAmount;
     private int allocatedAmount;
-
+ 
     @Enumerated(EnumType.STRING)
     private RequestStatus status;
 

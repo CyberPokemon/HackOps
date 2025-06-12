@@ -1,6 +1,6 @@
 # Ignore HELP.md in root or subdirectories
 HELP.md
-
+**/.env
 # Maven target directories
 **/target/
 !**/src/main/**/target/

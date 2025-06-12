@@ -2,11 +2,13 @@
 <html lang="en">
 
 <head>
+
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>SmartWater - Water Supply Scheduler</title>
-  <link rel="stylesheet" href="../css/styles.css">
+  <link rel="stylesheet" href="./styles.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
 </head>
 
 <body>
@@ -38,19 +40,21 @@
   <main>
     <div class="video-container">
       <video autoplay muted loop id="background-video">
-          <source src="water.mp4" type="video/mp4">
-          Your browser does not support the video tag.
+        <source src="water.mp4" type="video/mp4">
+        Your browser does not support the video tag.
       </video>
       <div class="overlay">
-          <div class="container">
-              <h1 class="animate-on-scroll hero-title" style="text-align: center;">Smart Local Water Supply Scheduler</h1>
-              <p class="animate-on-scroll hero-description" style="animation-delay: 0.3s">Efficiently manage water resources in your community. Register your needs as a citizen or</p>
-              <p class="animate-on-scroll hero-description" style="text-align: center; animation-delay: 0.5s">manage supply schedules as a municipality administrator.</p>
-              <div class="hero-buttons animate-on-scroll" style="animation-delay: 0.7s">
-                  <a href="register.html" class="btn btn-primary btn-large">Register as Citizen</a>
-                  <a href="register.html" class="btn btn-primary btn-large">Register as Admin</a>
-              </div>
+        <div class="container">
+          <h1 class="animate-on-scroll hero-title" style="text-align: center;">Smart Local Water Supply Scheduler</h1>
+          <p class="animate-on-scroll hero-description" style="animation-delay: 0.3s">Efficiently manage water resources
+            in your community. Register your needs as a citizen or</p>
+          <p class="animate-on-scroll hero-description" style="text-align: center; animation-delay: 0.5s">manage supply
+            schedules as a municipality administrator.</p>
+          <div class="hero-buttons animate-on-scroll" style="animation-delay: 0.7s">
+            <a href="register.html" class="btn btn-primary btn-large">Register as Citizen</a>
+            <a href="register.html" class="btn btn-primary btn-large">Register as Admin</a>
           </div>
+        </div>
       </div>
     </div>
 
@@ -130,9 +134,11 @@
     </div>
   </footer>
 
-  <script src="../js/main.js"></script>
-  <script src="../js/logo.js"></script>
-  <script src="../js/home.js"></script>
+  <script src="/main.js"></script>
+  <script src="/logo.js"></script>
+  <script src="/home.js"></script>
+  <script src="/charts.js"></script>
+  <script src="config.js"></script>
   <script>
     // Scroll animation
     const observer = new IntersectionObserver((entries) => {

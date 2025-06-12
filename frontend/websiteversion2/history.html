@@ -4,8 +4,8 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>History - SmartWater</title>
-  <link rel="stylesheet" href="../css/styles.css" />
-  <link rel="stylesheet" href="../css/dashboard.css" />
+  <link rel="stylesheet" href="./styles.css" />
+  <link rel="stylesheet" href="./dashboard.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
 </head>
 <body>
@@ -17,10 +17,10 @@
         <span>SmartWater</span>
       </div>
       <nav class="sidebar-nav">
-        <a href="../html/citizen-dashboard.html" class="sidebar-link"><i class="fas fa-home"></i><span>Dashboard</span></a>
-        <a href="../html/schedule.html" class="sidebar-link"><i class="fas fa-calendar-alt"></i><span>Schedule</span></a>
-        <a href="../html/history.html" class="sidebar-link active"><i class="fas fa-history"></i><span>History</span></a>
-        <a href="../html/settings.html" class="sidebar-link"><i class="fas fa-cog"></i><span>Settings</span></a>
+        <a href="./citizen-dashboard.html" class="sidebar-link"><i class="fas fa-home"></i><span>Dashboard</span></a>
+        <a href="./schedule.html" class="sidebar-link"><i class="fas fa-calendar-alt"></i><span>Schedule</span></a>
+        <a href="./history.html" class="sidebar-link active"><i class="fas fa-history"></i><span>History</span></a>
+        <a href="./settings.html" class="sidebar-link"><i class="fas fa-cog"></i><span>Settings</span></a>
       </nav>
       <div class="sidebar-footer">
         <div class="user-info">
@@ -151,16 +151,17 @@
   </div>
 
   <!-- Scripts -->
-  <script src="../js/logo.js"></script>
-  <script src="../js/dashboard.js"></script>
-  <script src="../js/charts.js"></script>
-  <script src="../js/history.js"></script>
+  <script src="./logo.js"></script>
+  <script src="./dashboard.js"></script>
+  <script src="./charts.js"></script>
+  <script src="./history.js"></script>
+  <script src="config.js"></script>
 
   <!-- ✅ Dispatch History API Script -->
   <script>
     const token = 'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJpbWFsbGlrMTExMSIsImlhdCI6MTc0NDIzMTM0NSwiZXhwIjoxNzQ0NDExMzQ1fQ.ytauduKIiHEHj_LFy3Z09iu9diMoPhBW_ywhypbCVL8';
 
-    fetch('http://localhost:8080/api/citizen/dispatch-history', {
+    fetch(`${API_BASE_URL}/api/citizen/dispatch-history`, {
       method: 'GET',
       headers: {
         'Authorization': 'Bearer ' + token,

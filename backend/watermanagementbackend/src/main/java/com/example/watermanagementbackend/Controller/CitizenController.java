@@ -55,5 +55,11 @@ public class CitizenController {
         return ResponseEntity.ok(waterService.getCitizenDispatchHistory(username));
     }
 
+    @GetMapping("/citizen/profile")
+    public ResponseEntity<?> getCitizenProfile(Authentication authentication) {
+        String username = authentication.getName(); // Extracted from JWT token
+        Citizen citizen = citizenService.getCitizenByUsername(username);
+        return ResponseEntity.ok(citizen);
+    }
 
 }
